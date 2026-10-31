@@ -11,16 +11,12 @@ import type { FilterStatus, Reach } from './hooks/useStatus.js';
 
 export type StatusAction = 'enable' | 'reload' | 'import' | 'choose';
 
-/** Toolbar-icon artwork that matches the state (public/icons/action/tile-*) */
-export type StatusIcon = 'off' | 'on' | 'filtering' | 'attention';
-
 export interface StatusCopy {
   /**
    * protected: muting ahead of each word; partial: muting from live captions;
    * idle: on, nothing to filter yet; attention: something stops protection; off
    */
   tone: 'protected' | 'partial' | 'idle' | 'attention' | 'off';
-  icon: StatusIcon;
   title: string;
   /** Service and episode, when known */
   context?: string;
@@ -52,19 +48,17 @@ export function describeStatus(
   if (!enabled) {
     return {
       tone: 'off',
-      icon: 'off',
       title: 'Protection is off',
       detail: 'Nothing is muted or masked on any site.',
       action: { kind: 'enable', label: 'Turn protection on' },
     };
   }
-  if (reach === 'checking') return { tone: 'idle', icon: 'on', title: 'Checking this tab…' };
+  if (reach === 'checking') return { tone: 'idle', title: 'Checking this tab…' };
   // On, but every word group is Off and Always mute is empty: a running
   // filter would protect from nothing, so this outranks every page state
   if (opts.mutesNothing) {
     return {
       tone: 'attention',
-      icon: 'attention',
       title: 'Nothing is set to mute',
       context: reach === 'connected' ? contextLine(s) : undefined,
       detail: 'Blasphemy and Swearing are both Off, and your Always mute list is empty.',
@@ -74,7 +68,6 @@ export function describeStatus(
   if (reach === 'unsupported') {
     return {
       tone: 'idle',
-      icon: 'on',
       title: 'Nothing to filter here',
       detail: `Open a show on ${SITES_SHORT}. Protection starts by itself.`,
     };
@@ -82,7 +75,6 @@ export function describeStatus(
   if (reach === 'disconnected') {
     return {
       tone: 'attention',
-      icon: 'attention',
       title: 'Reload this tab to start',
       detail: 'This tab was open before Blast Phemur was installed or updated.',
       action: { kind: 'reload', label: 'Reload tab' },
@@ -92,7 +84,6 @@ export function describeStatus(
   if (s.mode === 'precomputed') {
     return {
       tone: 'protected',
-      icon: 'filtering',
       title: 'Protected',
       context: contextLine(s),
       detail: `Using a filter made for this title: ${plural(s.segmentCount, 'moment')} to mute.`,
@@ -103,7 +94,6 @@ export function describeStatus(
     const from = s.source === 'player' ? "the show's own caption track" : 'your subtitle file';
     return {
       tone: 'protected',
-      icon: 'filtering',
       title: 'Protected',
       context: contextLine(s),
       detail: `Each word is muted as it is spoken, timed from ${from}. Word timing can be slightly early or late.`,
@@ -117,7 +107,6 @@ export function describeStatus(
     if (lines === 0) {
       return {
         tone: 'attention',
-        icon: 'attention',
         title: 'Turn on captions (CC)',
         context: s.provider ?? undefined,
         detail: 'Words are found in the captions, so nothing is filtered until they are on.',
@@ -126,7 +115,6 @@ export function describeStatus(
     }
     return {
       tone: 'partial',
-      icon: 'filtering',
       title: 'Partly protected',
       context: s.provider ?? undefined,
       detail:
@@ -140,7 +128,6 @@ export function describeStatus(
   if (s.smallVideoPlaying) {
     return {
       tone: 'idle',
-      icon: 'on',
       title: 'Only a preview is playing',
       context: s.provider ?? undefined,
       detail: 'Open the show full size, and protection starts.',
@@ -148,7 +135,6 @@ export function describeStatus(
   }
   return {
     tone: 'idle',
-    icon: 'on',
     title: s.provider ? `Ready on ${s.provider}` : 'Ready',
     detail: 'Play a show, and protection starts by itself.',
   };

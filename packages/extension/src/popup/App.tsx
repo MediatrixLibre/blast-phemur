@@ -153,7 +153,7 @@ export function App() {
 
       <footer className="gs-footer">
         <a href="privacy.html" target="_blank" rel="noopener noreferrer">Privacy</a>
-        {VERSION && <span className="gs-version">v{VERSION}</span>}
+        {VERSION && <span>v{VERSION}</span>}
       </footer>
     </>
   );

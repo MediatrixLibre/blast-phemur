@@ -32,7 +32,7 @@ A false alarm is one moment, so that is what you fix. Tap "That was fine here" i
 
 PRIVACY
 
-No account, no analytics, no telemetry, and no server of ours. Your settings stay in your browser. The only network request is the caption file the YouTube player already uses, fetched from YouTube the way the player fetches it.
+No account, no analytics, no telemetry, and no server of ours. Your settings stay in your browser. The only request that leaves your browser is the caption file the YouTube player already uses, fetched from YouTube the way the player fetches it, with your YouTube sign-in.
 
 OPEN SOURCE
 
@@ -56,9 +56,10 @@ Both conditions are met: LICENSE (GPL-3.0-or-later) and LICENSE-DATA (CC BY-SA 4
 Deliberately NOT claimed in two places: the short description (125 of 132 characters, and "open source" there reads as a tagline rather than a fact anyone can act on) and the popup footer (a standing badge on every open was removed as decoration on 2026-10-31). Adding a "Source" link beside "Privacy" in the popup footer is the open option; it would make `docs/publish/store/screenshot-1` stale.
 
 ## URLs (`pnpm publish:check` fetches each one; all must resolve before submitting)
-- Privacy policy: https://mediatrixlibre.github.io/blast-phemur/privacy-policy.html (source: `privacy-policy.html` at the repo root; the same page ships inside the extension as `privacy.html`)
-- Website: https://github.com/MediatrixLibre/blast-phemur
+- Privacy policy: https://mediatrixlibre.github.io/blast-phemur/privacy-policy.html (source: `privacy-policy.html` at the repo root; the same page ships inside the extension as `privacy.html`). Owner's choice 2026-10-31: the address of record is the one beside the source, needing nothing outside the repo to stay valid. The landing site redirects its own /privacy-policy here rather than hosting a second copy.
+- Homepage: https://blast-phemur.pages.dev (the landing site). Chosen over the repo because this field is what a viewer clicks to find out what the extension does, and the landing page shows the demo; a repository README is the wrong first page for that reader. The repo is reached from the description, the privacy page and the landing footer.
 - Support: https://github.com/MediatrixLibre/blast-phemur/issues
+- Source: https://github.com/MediatrixLibre/blast-phemur (named in the description, not a dashboard field)
 
 ## Contact email (shown publicly on the listing)
 mediatrixdev@proton.me
