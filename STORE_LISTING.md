@@ -34,6 +34,10 @@ PRIVACY
 
 No account, no analytics, no telemetry, and no server of ours. Your settings stay in your browser. The only network request is the caption file the YouTube player already uses, fetched from YouTube the way the player fetches it.
 
+OPEN SOURCE
+
+The code is public under the GNU General Public License version 3 or later, and the word lists under Creative Commons Attribution-ShareAlike 4.0, at github.com/MediatrixLibre/blast-phemur. Every privacy claim above can be read in the source.
+
 SUPPORTED SERVICES
 
 Runs on YouTube TV (tested on real playback), YouTube and DIRECTV Stream (built for and checked against their caption formats). More services will be added as each is tested.
@@ -46,8 +50,10 @@ Accessibility
 ## Language
 English
 
-## Open source (NOT CLAIMED in 0.2.0)
-The repository has no licence file and no public remote, so neither the listing, the privacy page nor the popup says "open source". To claim it: add a LICENSE at the repo root, publish the repository, then restore "open source" in `messages.json` `appDescription`, the popup footer (`App.tsx`), a privacy-page section and this listing, in one change.
+## Open source (CLAIMED from 2026-10-31)
+Both conditions are met: LICENSE (GPL-3.0-or-later) and LICENSE-DATA (CC BY-SA 4.0) are at the repo root, and https://github.com/MediatrixLibre/blast-phemur is public. The claim is made in the detailed description above and in a "Checking this for yourself" section on the privacy page.
+
+Deliberately NOT claimed in two places: the short description (125 of 132 characters, and "open source" there reads as a tagline rather than a fact anyone can act on) and the popup footer (a standing badge on every open was removed as decoration on 2026-10-31). Adding a "Source" link beside "Privacy" in the popup footer is the open option; it would make `docs/publish/store/screenshot-1` stale.
 
 ## URLs (`pnpm publish:check` fetches each one; all must resolve before submitting)
 - Privacy policy: https://mediatrixlibre.github.io/blast-phemur/privacy-policy.html (source: `privacy-policy.html` at the repo root; the same page ships inside the extension as `privacy.html`)
