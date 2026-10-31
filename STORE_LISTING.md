@@ -58,7 +58,7 @@ Deliberately NOT claimed in two places: the short description (125 of 132 charac
 ## URLs (`pnpm publish:check` fetches each one; all must resolve before submitting)
 - Privacy policy: https://mediatrixlibre.github.io/blast-phemur/privacy-policy.html (source: `privacy-policy.html` at the repo root; the same page ships inside the extension as `privacy.html`). Owner's choice 2026-10-31: the address of record is the one beside the source, needing nothing outside the repo to stay valid. The landing site redirects its own /privacy-policy here rather than hosting a second copy.
 - Homepage: https://blast-phemur.pages.dev (the landing site). Chosen over the repo because this field is what a viewer clicks to find out what the extension does, and the landing page shows the demo; a repository README is the wrong first page for that reader. The repo is reached from the description, the privacy page and the landing footer.
-- Support: https://github.com/MediatrixLibre/blast-phemur/issues
+- Support: https://blast-phemur.pages.dev/#faq (the landing site's questions section, which answers the common ones and gives the contact address). Chosen over the issues tracker because this listing is aimed at families, and opening a GitHub issue needs an account most of them will not have. The issues tracker is still named in the privacy page for anyone who prefers it.
 - Source: https://github.com/MediatrixLibre/blast-phemur (named in the description, not a dashboard field)
 
 ## Contact email (shown publicly on the listing)
