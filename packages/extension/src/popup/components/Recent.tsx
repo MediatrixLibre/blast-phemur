@@ -57,7 +57,7 @@ export function Recent({ hits, correct }: Props) {
           const k = keyOf(h, i);
           const plain = [...new Set(h.words.filter((w) => !isSacred(w)).map((w) => w.text.toLowerCase()))];
           const canPass = h.track !== undefined && h.start != null && h.end != null;
-          const words = [...new Set(h.words.map((w) => maskForDisplay(w.text)))].join(' · ');
+          const words = [...new Set(h.words.map((w) => maskForDisplay(w.text)))].join(', ');
           return (
             <li key={k} className="gs-recent-row">
               <span className="gs-recent-words">{words}</span>

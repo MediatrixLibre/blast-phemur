@@ -139,7 +139,7 @@ const json = async (p) => (await fetch(`http://127.0.0.1:${PORT}${p}`)).json();
     const { result: { targetId } } = await bro.send('Target.createTarget', { url: 'about:blank' });
     let pInfo; for (let i = 0; i < 20 && !pInfo; i++) { pInfo = (await json('/json/list')).find((t) => t.id === targetId); await sleep(200); }
     const page = await conn(pInfo.webSocketDebuggerUrl); conns.push(page);
-    const logs = []; page.on('Runtime.consoleAPICalled', (e) => { const t = (e.args || []).map((a) => a.value ?? '').join(' '); if (t.includes('GuardianStream')) logs.push(t); });
+    const logs = []; page.on('Runtime.consoleAPICalled', (e) => { const t = (e.args || []).map((a) => a.value ?? '').join(' '); if (t.includes('Blast Phemur')) logs.push(t); });
     await page.send('Runtime.enable');
     await page.send('Inspector.enable');
     page.on('Inspector.targetCrashed', () => console.log('  [!] PAGE CRASHED'));

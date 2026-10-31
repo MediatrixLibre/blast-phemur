@@ -147,7 +147,7 @@ export class CaptionMonitor {
 
     const selector = this.provider.getSubtitleSelector?.();
     if (!selector) {
-      console.log('[GuardianStream] No subtitle selector for this provider');
+      console.log('[Blast Phemur] No subtitle selector for this provider');
       return;
     }
 
@@ -164,7 +164,7 @@ export class CaptionMonitor {
     // without adding/removing DOM nodes)
     this.startPolling(selector);
 
-    console.log(`[GuardianStream] Caption monitor active (${this.provider.manifest.name})`);
+    console.log(`[Blast Phemur] Caption monitor active (${this.provider.manifest.name})`);
   }
 
   /** Stop monitoring and restore audio */
@@ -185,7 +185,7 @@ export class CaptionMonitor {
       this.unmuteTimer = null;
     }
 
-    console.log(`[GuardianStream] Caption monitor stopped (${this.matchCount} matches found)`);
+    console.log(`[Blast Phemur] Caption monitor stopped (${this.matchCount} matches found)`);
   }
 
   /**
@@ -283,7 +283,7 @@ export class CaptionMonitor {
       this.muteForDuration(this.MUTE_DURATION_MS, maskWord(bestMatch.text));
 
       console.log(
-        `[GuardianStream] Caption match: "${maskWord(bestMatch.text)}" (${bestMatch.category}, sev:${bestMatch.severity})`,
+        `[Blast Phemur] Caption match: "${maskWord(bestMatch.text)}" (${bestMatch.category}, sev:${bestMatch.severity})`,
       );
     }
   }

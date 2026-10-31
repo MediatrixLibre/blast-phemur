@@ -158,11 +158,11 @@ describe('correction keys', () => {
     expect(saved).toEqual([{ block: [], allow: ['hell'], passes: [] }]);
   });
 
-  it('"[" with nothing recently hidden just says so', () => {
+  it('"[" with nothing recently muted just says so', () => {
     const { press, saved, toasts } = setup({ recentHits: () => [] });
     press('[');
     expect(saved).toEqual([]);
-    expect(toasts[0].text).toMatch(/Nothing was hidden/);
+    expect(toasts[0].text).toMatch(/Nothing was muted/);
   });
 
   it('"]" asks which word, and a number key picks it', () => {

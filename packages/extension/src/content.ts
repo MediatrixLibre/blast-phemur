@@ -100,7 +100,7 @@ async function loadFilters(
     try {
       const apiResult = await new ApiClient().fetchFilters(contentId);
       if (apiResult && apiResult.segments.length > 0) {
-        console.log(`[GuardianStream] Loaded ${apiResult.segments.length} segments from API`);
+        console.log(`[Blast Phemur] Loaded ${apiResult.segments.length} segments from API`);
         return apiResult;
       }
     } catch {
@@ -185,7 +185,7 @@ async function onVideoFound(video: HTMLVideoElement): Promise<void> {
     engine.start();
 
     console.log(
-      `[GuardianStream] Filtering active: ${engine.segmentCount} segments on ${currentProvider.manifest.name}`,
+      `[Blast Phemur] Filtering active: ${engine.segmentCount} segments on ${currentProvider.manifest.name}`,
     );
 
     // Hide the words on screen too
@@ -216,7 +216,7 @@ async function onVideoFound(video: HTMLVideoElement): Promise<void> {
     });
 
     console.log(
-      `[GuardianStream] Caption monitoring active on ${currentProvider.manifest.name} (${tracks.length} subtitle tracks loaded)`,
+      `[Blast Phemur] Caption monitoring active on ${currentProvider.manifest.name} (${tracks.length} subtitle tracks loaded)`,
     );
   }
 }
@@ -229,14 +229,14 @@ function onVideoRemoved(video: HTMLVideoElement): void {
   if (engine) {
     engine.stop();
     activeEngines.delete(video);
-    console.log('[GuardianStream] Engine stopped for removed video');
+    console.log('[Blast Phemur] Engine stopped for removed video');
   }
 
   const session = activeSessions.get(video);
   if (session) {
     session.stop();
     activeSessions.delete(video);
-    console.log('[GuardianStream] Subtitle session stopped for removed video');
+    console.log('[Blast Phemur] Subtitle session stopped for removed video');
   }
 
   activeCensors.get(video)?.stop();
@@ -292,7 +292,7 @@ function saveCustomWords(words: CustomWords): void {
     chrome.storage.local.set({ config: userConfig });
   } catch {
     // This tab still runs a copy from before the extension was reloaded
-    console.warn('[GuardianStream] Could not save: reload this tab.');
+    console.warn('[Blast Phemur] Could not save: reload this tab.');
   }
 }
 
@@ -342,7 +342,7 @@ function debugReport(): Record<string, unknown> {
     Object.entries(userConfig.categories).map(([k, v]) => [k, `${v.threshold}/${v.action}`]),
   );
   return {
-    report: 'GuardianStream debug',
+    report: 'Blast Phemur debug',
     page: { host: location.host, path: location.pathname.slice(0, 30), title: document.title.slice(0, 50) },
     provider: currentProvider?.manifest.id ?? null,
     status: currentStatus(),
@@ -397,8 +397,8 @@ function noticeAtStart(): void {
   if (!video || video.paused || document.visibilityState !== 'visible') return;
   noticedTitle = title;
   showToast(video, {
-    text: 'GuardianStream is filtering this showing',
-    hint: 'It is altered from the original: the words you chose are muted.  [ that was fine  ·  ] mute it  ·  \\ undo',
+    text: 'Blast Phemur is filtering this showing',
+    hint: 'It is altered from the original: the words you chose are muted. Keys: [ that was fine, ] mute it, \\ undo.',
     holdMs: 6000,
   });
 }
@@ -452,7 +452,7 @@ function standDown(why: string): void {
   retired = true;
   cleanups.splice(0).forEach((fn) => { try { fn(); } catch { /* best effort */ } });
   [...knownVideos].forEach(onVideoRemoved);
-  console.log(`[GuardianStream] This copy stood down (${why})`);
+  console.log(`[Blast Phemur] This copy stood down (${why})`);
 }
 
 function orphaned(): boolean {
@@ -525,7 +525,7 @@ async function init(): Promise<void> {
     });
   }
 
-  console.log('[GuardianStream] Content script initialized');
+  console.log('[Blast Phemur] Content script initialized');
 }
 
 // Go

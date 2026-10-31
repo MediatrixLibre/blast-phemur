@@ -32,7 +32,6 @@ export function Hero({ tab, enabled, mutesNothing, onEnable, onChoose }: HeroPro
 
   return (
     <section className={`gs-hero is-${copy.tone}`} role="status" aria-live="polite" aria-atomic="true">
-      <img className="gs-hero-mark" src={`icons/action/tile-${copy.icon}-32.png`} width={32} height={32} alt="" />
       <div className="gs-hero-body">
         <h1 className="gs-hero-title">{copy.title}</h1>
         {copy.context && <p className="gs-hero-context">{copy.context}</p>}

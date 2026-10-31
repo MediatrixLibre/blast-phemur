@@ -292,7 +292,7 @@ export class SubtitleSession {
         this.engine.start();
         debugLog('anchored', { episode: track.title, offset: +this.anchor.offset.toFixed(2), filters: this.engine.segmentCount });
         console.log(
-          `[GuardianStream] Anchored to ${track.title}: ${this.engine.segmentCount} filters, offset ${this.anchor.offset.toFixed(1)}s`,
+          `[Blast Phemur] Anchored to ${track.title}: ${this.engine.segmentCount} filters, offset ${this.anchor.offset.toFixed(1)}s`,
         );
       } else {
         this.engine.resync();
@@ -300,7 +300,7 @@ export class SubtitleSession {
       this.monitor.setActive(false);
     } else if (this.engine) {
       debugLog('lost-sync');
-      console.log('[GuardianStream] Lost sync, back to caption mode');
+      console.log('[Blast Phemur] Lost sync, back to caption mode');
       this.engine.stop();
       this.engine = null;
       this.engineKey = null;

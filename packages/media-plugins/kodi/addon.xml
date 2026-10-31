@@ -16,7 +16,7 @@
       Uses AI-generated and community-verified filter data from GuardianStream.
       Supports blasphemy, profanity, nudity, violence, and user-defined categories.
     </description>
-    <license>MIT</license>
+    <license>GPL-3.0-or-later</license>
     <platform>all</platform>
   </extension>
 </addon>

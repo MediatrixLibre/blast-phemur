@@ -1,4 +1,4 @@
-# GuardianStream
+# Blast Phemur*
 
 A browser extension that mutes blasphemy and swearing as they are spoken on streaming video, and masks the same words in the captions. No account, no analytics, no server: everything happens in your browser.
 
@@ -6,10 +6,10 @@ Version 0.2.0. Built for Chrome; tested in Brave, which runs Chrome extensions a
 
 ## How it works
 
-GuardianStream finds the words in the show's own captions and lowers the volume for the moment each one is spoken.
+Blast Phemur finds the words in the show's own captions and lowers the volume for the moment each one is spoken.
 
-- On YouTube TV and YouTube it reads the player's own caption track, so each word is muted as it is spoken, even in a background tab. Timing comes from the captions, so it is close, not exact.
-- On other services it reads the captions as they appear on screen, so turn captions (CC) on. A filtered line goes quiet; a word can slip out before the mute. Adding the episode's subtitle file gives word-by-word timing there too.
+- On YouTube TV and YouTube it reads the player's own caption track, so each word is muted as it is spoken, even in a background tab. Word timing comes from the captions, so it can be slightly early or late.
+- On DIRECTV Stream it reads the captions the video carries, so turn captions (CC) on. Adding the episode's subtitle file gives word-by-word timing there too.
 - The toolbar button always says which of these is happening on the tab you are watching.
 
 A false alarm is one moment, so that is what you fix: "That was fine here" in the toolbar button, or `[` on the player, lets that moment play from then on while the word stays muted everywhere else. `]` mutes something that got through; `\` undoes.
@@ -20,11 +20,11 @@ A false alarm is one moment, so that is what you fix: "That was fine here" in th
 |---|---|
 | YouTube TV | Tested on real playback |
 | YouTube, DIRECTV Stream | Built for and checked against their caption formats |
-| Netflix, Prime Video, Disney+, Hulu, Max, Apple TV+, Peacock, Paramount+, Crunchyroll, Tubi, Pluto TV | Runs wherever captions are on; not yet tested on each |
+| Netflix, Prime Video, Disney+, Hulu, Max and others | Built in the code but switched off until each is tested |
 
 ## Privacy
 
-GuardianStream collects nothing and sends nothing. Settings, your word lists, passed moments and any subtitle files you add stay in your browser, and removing the extension removes them. The full policy is [privacy-policy.html](privacy-policy.html); the same page ships inside the extension.
+Blast Phemur collects nothing and sends nothing. Settings, your word lists, passed moments and any subtitle files you add stay in your browser, and removing the extension removes them. The full policy is [privacy-policy.html](privacy-policy.html); the same page ships inside the extension.
 
 ## Building and testing
 
@@ -52,7 +52,7 @@ Filtering happens at the viewer's direction, on the viewer's own playback of an 
 
 ## Licence
 
-No licence has been chosen yet, so all rights are reserved for now.
+The code is under the GNU General Public License, version 3 or later ([LICENSE](LICENSE)). The word lists and the blasphemy taxonomy are under Creative Commons Attribution-ShareAlike 4.0 ([LICENSE-DATA](LICENSE-DATA)). Neither covers the project's name or icon: a modified version must use its own.
 
 ## Contact
 

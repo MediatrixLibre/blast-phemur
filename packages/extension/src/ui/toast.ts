@@ -55,12 +55,10 @@ export function showToast(video: HTMLVideoElement, opts: ToastOptions): ToastHan
     maxWidth: '70%',
     padding: '10px 14px 10px 12px',
     borderRadius: '10px',
-    // The brand's teal, deep enough for white text over any picture (14.7:1 at worst, over white)
-    background: 'rgba(12, 29, 27, 0.94)',
-    borderLeft: '3px solid #86c8c1',
-    color: '#fff',
+    // The brand's night, deep enough for oat text over any picture (13.1:1 at worst, over white)
+    background: 'rgba(30, 23, 18, 0.94)',
+    color: '#f6eedf',
     font: '500 13.5px/1.4 system-ui, -apple-system, sans-serif',
-    boxShadow: '0 6px 24px rgba(0, 0, 0, 0.45)',
     opacity: '0',
     transition: `opacity ${FADE_MS}ms ease`,
     zIndex: '2147483000',
@@ -74,8 +72,8 @@ export function showToast(video: HTMLVideoElement, opts: ToastOptions): ToastHan
   if (opts.hint) {
     const hint = document.createElement('div');
     hint.textContent = opts.hint;
-    // #b9cfcc on the toast background is 9:1, readable at this size
-    Object.assign(hint.style, { color: '#b9cfcc', fontSize: '12px', marginTop: '3px' });
+    // #b8a894 on the toast background is 6.5:1 at worst, readable at this size
+    Object.assign(hint.style, { color: '#b8a894', fontSize: '12px', marginTop: '3px' });
     el.appendChild(hint);
   }
 
@@ -110,8 +108,8 @@ export function showToast(video: HTMLVideoElement, opts: ToastOptions): ToastHan
       Object.assign(b.style, {
         font: 'inherit',
         color: '#fff',
-        background: 'rgba(134, 200, 193, 0.16)',
-        border: '1px solid rgba(134, 200, 193, 0.55)',
+        background: 'rgba(143, 207, 196, 0.16)',
+        border: '1px solid rgba(143, 207, 196, 0.55)',
         borderRadius: '7px',
         padding: '5px 10px',
         minHeight: '28px',

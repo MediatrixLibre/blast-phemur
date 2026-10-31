@@ -1,14 +1,14 @@
 {
   "appName": {
-    "message": "GuardianStream",
+    "message": "Blast Phemur*",
     "description": "The extension's name. A rename is this one value."
   },
   "appShortName": {
-    "message": "GuardianStream",
+    "message": "Blast Phemur",
     "description": "Short name where space is tight."
   },
   "appDescription": {
-    "message": "Mutes blasphemy and swearing on streaming video and masks them in the captions. Free, no account, no tracking.",
+    "message": "Mutes blasphemy and swearing on streaming video and masks them in the captions. Free to use, with no account and no tracking.",
     "description": "Store and extensions-page description (132 characters at most)."
   }
 }

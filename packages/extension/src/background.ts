@@ -32,15 +32,15 @@ async function connectOpenTabs(): Promise<number> {
 }
 
 chrome.runtime.onInstalled.addListener((details) => {
-  console.log(`[GuardianStream] Extension ${details.reason}`);
-  void connectOpenTabs().then((n) => console.log(`[GuardianStream] Connected ${n} open tab script(s)`));
+  console.log(`[Blast Phemur] Extension ${details.reason}`);
+  void connectOpenTabs().then((n) => console.log(`[Blast Phemur] Connected ${n} open tab script(s)`));
   // First install only: a short welcome that sets the level in one tap
   if (details.reason === 'install') {
     void chrome.tabs.create({ url: chrome.runtime.getURL('popup.html?view=welcome') }).catch(() => {});
   }
 });
 
-const appName = (): string => chrome.i18n?.getMessage('appName') || 'GuardianStream';
+const appName = (): string => chrome.i18n?.getMessage('appName') || 'Blast Phemur*';
 
 /** Plain-words tooltip for each toolbar state */
 const TITLES: Record<string, string> = {
@@ -79,7 +79,7 @@ chrome.runtime.onMessage.addListener(
         return true; // async response
 
       case 'LOG':
-        console.log('[GuardianStream]', message.payload);
+        console.log('[Blast Phemur]', message.payload);
         break;
     }
   },

@@ -1,6 +1,7 @@
 {
   "name": "guardianstream",
   "private": true,
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",

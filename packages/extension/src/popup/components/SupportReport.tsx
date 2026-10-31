@@ -16,7 +16,7 @@ export function SupportReport({ tabId }: { tabId: number | null }) {
   return (
     <div className="gs-row-between">
       <span className="gs-item-text">
-        <span className="gs-item-name">Something went wrong?</span>
+        <span className="gs-item-name">Report a problem</span>
         <span className="gs-item-desc" aria-live="polite">{note || 'Copy a report of this tab to the clipboard. Nothing is sent.'}</span>
       </span>
       <button className="gs-btn gs-btn-quiet" onClick={copy}>Copy report</button>

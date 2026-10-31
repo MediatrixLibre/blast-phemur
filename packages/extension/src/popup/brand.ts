@@ -1,9 +1,9 @@
 /** The product name, from _locales (one value to rename), with a fallback for previews */
 export function appName(): string {
   try {
-    return chrome.i18n.getMessage('appName') || 'GuardianStream';
+    return chrome.i18n.getMessage('appName') || 'Blast Phemur*';
   } catch {
-    return 'GuardianStream';
+    return 'Blast Phemur*';
   }
 }
 

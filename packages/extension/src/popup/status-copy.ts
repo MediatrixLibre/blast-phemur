@@ -30,9 +30,9 @@ export interface StatusCopy {
   secondary?: { kind: StatusAction; label: string };
 }
 
-export const SITES = 'YouTube TV, YouTube, Netflix, Prime Video, Disney+, Max, Hulu and other streaming sites';
+export const SITES = 'YouTube TV, YouTube or DIRECTV Stream';
 /** The short form, where two lines is the budget */
-export const SITES_SHORT = 'YouTube TV, Netflix, Prime Video, Disney+ or another streaming site';
+export const SITES_SHORT = 'YouTube TV, YouTube or DIRECTV Stream';
 
 const plural = (n: number, one: string, many = `${one}s`): string => `${n} ${n === 1 ? one : many}`;
 
@@ -84,7 +84,7 @@ export function describeStatus(
       tone: 'attention',
       icon: 'attention',
       title: 'Reload this tab to start',
-      detail: 'This tab was open before GuardianStream was installed or updated.',
+      detail: 'This tab was open before Blast Phemur was installed or updated.',
       action: { kind: 'reload', label: 'Reload tab' },
     };
   }
@@ -93,9 +93,9 @@ export function describeStatus(
     return {
       tone: 'protected',
       icon: 'filtering',
-      title: 'Protected, moment by moment',
+      title: 'Protected',
       context: contextLine(s),
-      detail: `Using a filter made for this title: ${plural(s.segmentCount, 'moment')} to hide.`,
+      detail: `Using a filter made for this title: ${plural(s.segmentCount, 'moment')} to mute.`,
     };
   }
 
@@ -104,9 +104,9 @@ export function describeStatus(
     return {
       tone: 'protected',
       icon: 'filtering',
-      title: 'Protected, word by word',
+      title: 'Protected',
       context: contextLine(s),
-      detail: `Each word is muted as it is spoken, timed from ${from}. The timing is close, not exact.`,
+      detail: `Each word is muted as it is spoken, timed from ${from}. Word timing can be slightly early or late.`,
     };
   }
 
@@ -127,7 +127,7 @@ export function describeStatus(
     return {
       tone: 'partial',
       icon: 'filtering',
-      title: 'Protected, line by line',
+      title: 'Partly protected',
       context: s.provider ?? undefined,
       detail:
         `Reading captions as they appear, so a word can slip out before the mute. ${plural(hits, 'word')} muted so far.` +

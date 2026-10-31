@@ -126,7 +126,7 @@ const soften = (s) => String(s).replace(/\b(f)uck\w*|\b(s)hit\w*|(c)ocksuck\w*|(
     const consoleLines = [];
     const live = process.argv.includes('--live');
     const t0 = Date.now();
-    page.on('console', (m) => { if (m.text().includes('GuardianStream')) { consoleLines.push(m.text()); if (live) console.log(`[${((Date.now() - t0) / 1000).toFixed(1)}s] ${m.text().slice(0, 140)}`); } });
+    page.on('console', (m) => { if (m.text().includes('Blast Phemur')) { consoleLines.push(m.text()); if (live) console.log(`[${((Date.now() - t0) / 1000).toFixed(1)}s] ${m.text().slice(0, 140)}`); } });
     page.on('pageerror', (e) => console.log('PAGE ERROR', e.message));
     await page.route('https://tv.youtube.com/watch/TEST123**', (r) =>
       r.fulfill({ status: 200, contentType: 'text/html', body: PAGE(port) }));
@@ -165,7 +165,7 @@ const soften = (s) => String(s).replace(/\b(f)uck\w*|\b(s)hit\w*|(c)ocksuck\w*|(
     // Drop the harness's own initial state before playback starts
     const played = log.filter((s) => s.t > 0.2);
 
-    console.log('\nGuardianStream console:');
+    console.log('\nBlast Phemur console:');
     consoleLines.slice(0, 12).forEach((l) => console.log('  ' + l));
     console.log('\nMute intervals (video seconds):');
     intervals.forEach((i) => console.log(`  ${i.from.toFixed(2)} -> ${i.to.toFixed(2)}  (${(i.to - i.from).toFixed(2)}s)`));

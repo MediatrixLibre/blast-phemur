@@ -32,9 +32,9 @@ describe('describeStatus', () => {
     expect(c.tone).toBe('attention');
   });
 
-  it('live captions say line by line, count the mutes, and offer a subtitle file', () => {
+  it('live captions say partly protected, count the mutes, and offer a subtitle file', () => {
     const c = describeStatus('connected', { ...base, mode: 'captions', captionLines: 12, captionHits: 3, libraryCount: 0 }, true);
-    expect(c.title).toBe('Protected, line by line');
+    expect(c.title).toBe('Partly protected');
     expect(c.detail).toContain('3 words muted so far');
     expect(c.detail).toMatch(/slip out/);
     expect(c.secondary?.kind).toBe('import');
@@ -46,12 +46,12 @@ describe('describeStatus', () => {
     expect(c.secondary).toBeUndefined();
   });
 
-  it('anchored says word by word, names the episode and the timing source, without promising exactness', () => {
+  it('anchored says protected, names the episode and the timing source, without promising exactness', () => {
     const lib = describeStatus('connected', { ...base, mode: 'anchored', title: 'Deadwood S01E02', segmentCount: 40, source: 'library' }, true);
-    expect(lib.title).toBe('Protected, word by word');
+    expect(lib.title).toBe('Protected');
     expect(lib.context).toBe('YouTube TV · “Deadwood S01E02”');
     expect(lib.detail).toMatch(/subtitle file/);
-    expect(lib.detail).toMatch(/close, not exact/);
+    expect(lib.detail).toMatch(/slightly early or late/);
     expect(lib.tone).toBe('protected');
     const player = describeStatus('connected', { ...base, mode: 'anchored', title: 'Deadwood', segmentCount: 1, source: 'player' }, true);
     expect(player.detail).toMatch(/own caption track/);

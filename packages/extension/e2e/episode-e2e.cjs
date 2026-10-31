@@ -83,7 +83,7 @@ const soften = (s) => String(s).replace(/\b(f)uck\w*|\b(s)hit\w*|(c)ocksuck\w*|(
     await sw.evaluate((it) => new Promise((r) => chrome.storage.local.set(it, r)), items);
 
     const page = await ctx.newPage();
-    const logs = []; page.on('console', (m) => { if (m.text().includes('GuardianStream')) logs.push(m.text()); });
+    const logs = []; page.on('console', (m) => { if (m.text().includes('Blast Phemur')) logs.push(m.text()); });
     const html = `<!doctype html><title>Deadwood - YouTube TV</title><body style="background:#000;margin:0">
 <div id="p" style="position:relative;width:960px;height:540px"><video class="html5-main-video" src="http://127.0.0.1:${port}/clip.mp4" width="960" height="540" playsinline></video>
 <div id="c" style="position:absolute;bottom:30px;width:100%;text-align:center;color:#fff"></div></div>

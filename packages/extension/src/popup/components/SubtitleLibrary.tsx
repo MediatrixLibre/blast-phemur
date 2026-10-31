@@ -48,7 +48,7 @@ export function SubtitleLibrary({ inTab, onOpenImport }: Props) {
       <p className="gs-hint">
         For services without a caption track of their own, a subtitle file lets words be muted just before they are
         spoken. Name files like <code>Show.Name.S01E02.srt</code>; the episode playing is found on its own. Not needed on
-        YouTube TV.
+        YouTube or YouTube TV.
       </p>
 
       {inTab ? (

@@ -12,48 +12,16 @@
     "scripting"
   ],
   "host_permissions": [
-    "https://www.netflix.com/*",
-    "https://www.amazon.com/*",
-    "https://www.amazon.co.uk/*",
-    "https://www.amazon.de/*",
-    "https://www.amazon.co.jp/*",
-    "https://www.primevideo.com/*",
-    "https://www.disneyplus.com/*",
-    "https://www.hulu.com/*",
-    "https://www.youtube.com/*",
     "https://tv.youtube.com/*",
-    "https://www.max.com/*",
-    "https://*.hbomax.com/*",
-    "https://stream.directv.com/*",
-    "https://tv.apple.com/*",
-    "https://www.peacocktv.com/*",
-    "https://www.paramountplus.com/*",
-    "https://www.crunchyroll.com/*",
-    "https://tubitv.com/*",
-    "https://pluto.tv/*"
+    "https://www.youtube.com/*",
+    "https://stream.directv.com/*"
   ],
   "content_scripts": [
     {
       "matches": [
-        "https://www.netflix.com/*",
-        "https://www.amazon.com/*",
-        "https://www.amazon.co.uk/*",
-        "https://www.amazon.de/*",
-        "https://www.amazon.co.jp/*",
-        "https://www.primevideo.com/*",
-        "https://www.disneyplus.com/*",
-        "https://www.hulu.com/*",
-        "https://www.youtube.com/*",
         "https://tv.youtube.com/*",
-        "https://www.max.com/*",
-        "https://*.hbomax.com/*",
-        "https://stream.directv.com/*",
-        "https://tv.apple.com/*",
-        "https://www.peacocktv.com/*",
-        "https://www.paramountplus.com/*",
-        "https://www.crunchyroll.com/*",
-        "https://tubitv.com/*",
-        "https://pluto.tv/*"
+        "https://www.youtube.com/*",
+        "https://stream.directv.com/*"
       ],
       "js": [
         "content.js"

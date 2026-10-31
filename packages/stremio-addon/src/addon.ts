@@ -47,7 +47,7 @@ export const MANIFEST = {
       default: 'moderate',
     },
   ],
-  logo: 'https://mediatrixlibre.github.io/guardianstream/assets/icon-128.png',
-  background: 'https://mediatrixlibre.github.io/guardianstream/assets/background.jpg',
+  logo: 'https://mediatrixlibre.github.io/blast-phemur/assets/icon-128.png',
+  background: 'https://mediatrixlibre.github.io/blast-phemur/assets/background.jpg',
   contactEmail: 'mediatrixdev@proton.me',
 } as const;

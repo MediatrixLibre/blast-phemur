@@ -1,23 +1,23 @@
-# Chrome Web Store listing: GuardianStream 0.2.0
+# Chrome Web Store listing: Blast Phemur* 0.2.0
 
 Every claim here is true of the 0.2.0 build. Update this file in the same change as any feature that alters a claim.
 
 ## Name
-GuardianStream (from `packages/extension/public/_locales/en/messages.json`, `appName`)
+Blast Phemur* (from `packages/extension/public/_locales/en/messages.json`, `appName`)
 
-## Short description (132 characters max; this is 110)
-Mutes blasphemy and swearing on streaming video and masks them in the captions. Free, no account, no tracking.
+## Short description (132 characters max; this is 125)
+Mutes blasphemy and swearing on streaming video and masks them in the captions. Free to use, with no account and no tracking.
 
 ## Detailed description
 
-GuardianStream mutes blasphemy and swearing as they are spoken on streaming video, and masks the same words in the captions. Set it once and watch.
+Blast Phemur mutes blasphemy and swearing as they are spoken on streaming video, and masks the same words in the captions.
 
 HOW IT WORKS
 
-GuardianStream finds the words in the show's own captions and lowers the volume for the moment each one is spoken.
+Blast Phemur finds the words in the show's own captions and lowers the volume for the moment each one is spoken.
 
-- On YouTube TV and YouTube it reads the player's own caption track, so each word is muted as it is spoken, even in a background tab. Timing comes from the captions, so it is close, not exact.
-- On other services it reads the captions as they appear on screen, so turn captions (CC) on. A filtered line goes quiet; a word can slip out before the mute. Adding the episode's subtitle file gives word-by-word timing there too.
+- On YouTube TV and YouTube it reads the player's own caption track, so each word is muted as it is spoken, even in a background tab. Word timing comes from the captions, so it can be slightly early or late.
+- On DIRECTV Stream it reads the captions the video carries, so turn captions (CC) on. Adding the episode's subtitle file gives word-by-word timing there too.
 - The toolbar button always says which of these is happening on the tab you are watching.
 
 WHAT YOU CHOOSE
@@ -28,7 +28,7 @@ WHAT YOU CHOOSE
 
 WHEN IT GETS ONE WRONG
 
-A false alarm is one moment, so that is what you fix. Tap "That was fine here" in the toolbar button, or press [ on the player, and that moment plays from now on while the word stays muted everywhere else. A prayer caught by the blasphemy filter is passed the same way; a sacred name is never allowed everywhere. Something got through? Press ]. Press \ to undo.
+A false alarm is one moment, so that is what you fix. Tap "That was fine here" in the toolbar button, or press [ on the player, and that moment plays from now on while the word stays muted everywhere else. A prayer caught by the blasphemy filter is passed the same way; a sacred name is never allowed everywhere. If a word gets through, press ]. Press \ to undo.
 
 PRIVACY
 
@@ -36,7 +36,7 @@ No account, no analytics, no telemetry, and no server of ours. Your settings sta
 
 SUPPORTED SERVICES
 
-Tested on real playback: YouTube TV. Built for and checked against each service's caption format: YouTube, DIRECTV Stream. Also runs on other major streaming sites wherever captions are on, not yet tested on each; the full list is on the support page.
+Runs on YouTube TV (tested on real playback), YouTube and DIRECTV Stream (built for and checked against their caption formats). More services will be added as each is tested.
 
 (Store policy: name at most five services or brands in the description; a longer list goes on a linked page or in a screenshot. This text names three.)
 
@@ -50,9 +50,9 @@ English
 The repository has no licence file and no public remote, so neither the listing, the privacy page nor the popup says "open source". To claim it: add a LICENSE at the repo root, publish the repository, then restore "open source" in `messages.json` `appDescription`, the popup footer (`App.tsx`), a privacy-page section and this listing, in one change.
 
 ## URLs (`pnpm publish:check` fetches each one; all must resolve before submitting)
-- Privacy policy: https://mediatrixlibre.github.io/guardianstream/privacy-policy.html (source: `privacy-policy.html` at the repo root; the same page ships inside the extension as `privacy.html`)
-- Website: https://github.com/MediatrixLibre/guardianstream
-- Support: https://github.com/MediatrixLibre/guardianstream/issues
+- Privacy policy: https://mediatrixlibre.github.io/blast-phemur/privacy-policy.html (source: `privacy-policy.html` at the repo root; the same page ships inside the extension as `privacy.html`)
+- Website: https://github.com/MediatrixLibre/blast-phemur
+- Support: https://github.com/MediatrixLibre/blast-phemur/issues
 
 ## Contact email (shown publicly on the listing)
 mediatrixdev@proton.me

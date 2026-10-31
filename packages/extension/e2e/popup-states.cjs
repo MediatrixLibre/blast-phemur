@@ -102,6 +102,8 @@ const PAGE = (port, captions) => `<!doctype html><html><head><title>Test Show - 
       await p.setViewportSize({ width, height: 600 });
       await p.emulateMedia({ colorScheme: scheme });
       await p.goto(url);
+      // Dark is the default whatever the system; light is the data-theme switch
+      if (scheme === 'light') await p.evaluate(() => { document.documentElement.dataset.theme = 'light'; });
       await p.waitForTimeout(1800); // two status polls
       for (const sel of open) await p.click(sel);
       if (open.length) await p.waitForTimeout(300);

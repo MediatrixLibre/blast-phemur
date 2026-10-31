@@ -1,47 +1,48 @@
 /*
- * GuardianStream popup, welcome and subtitle pages.
- * One accent (the teal of the mark), warm paper, 1px rules, system type.
- * No gradients, glass or glyph icons. Light and dark; reduced motion respected.
- * Contrast (WCAG, computed): ink-2 on bg 8.2:1 light / 7.9:1 dark, on tints 6.5:1
- * or more; accent on surface 8.4 / 8.8; on-accent on accent 8.4 / 9.1;
- * attention on its tint 6.5 / 8.0; control edges (rule-strong) 4.2 / 4.4.
+ * Blast Phemur popup, welcome and subtitle pages.
+ * Palette D4 (brand board d4-swear-jar): night and oat, sea-glass accent, penny for attention.
+ * Dark whatever the system (owner's call, 31 October 2026); light is <html data-theme="light">.
+ * To follow the system instead, wrap the light block in @media (prefers-color-scheme: light).
+ * No gradients, glass or glyph icons; reduced motion respected.
+ * Contrast (WCAG, computed): ink-2 on bg 7.6:1 dark / 6.9:1 light, on tints 5.7 / 6.2 or more;
+ * accent on surface 9.0 / 5.9; on-accent on accent 10.0 / 5.9; attention on its tint 6.1 / 4.7;
+ * control edges (rule-strong) 3.3 / 4.3 or more.
  */
 :root {
-  --bg: #fafaf7;
-  --surface: #ffffff;
-  --sunken: #f1f1ea;
-  --ink: #1c1d1b;
-  --ink-2: #4b4d46;
-  --rule: #deded5;
-  --rule-strong: #7a7c73;
-  --accent: #16555f;
-  --accent-tint: #e7f0ee;
-  --accent-line: #b9d3cf;
-  --on-accent: #ffffff;
-  --attention: #8a4209;
-  --attention-tint: #fbefe3;
-  --attention-line: #ecc9a6;
+  --bg: #1e1712;
+  --surface: #2a2019;
+  --sunken: #17120e;
+  --ink: #f6eedf;
+  --ink-2: #b8a894;
+  --rule: #3d342c;
+  --rule-strong: #7d7163;
+  --accent: #8fcfc4;
+  --accent-tint: #2e312b;
+  --accent-line: #44564f;
+  --on-accent: #1e1712;
+  --attention: #e69a5e;
+  --attention-tint: #38281c;
+  --attention-line: #62442c;
   --radius: 10px;
   --radius-sm: 7px;
-  color-scheme: light dark;
+  color-scheme: dark;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #141615;
-    --surface: #1b1e1c;
-    --sunken: #101211;
-    --ink: #ebece8;
-    --ink-2: #aaaca4;
-    --rule: #2d302d;
-    --rule-strong: #80837b;
-    --accent: #86c8c1;
-    --accent-tint: #142b29;
-    --accent-line: #2c4b48;
-    --on-accent: #0c1d1b;
-    --attention: #f0a766;
-    --attention-tint: #2b1e12;
-    --attention-line: #5a3b1d;
-  }
+:root[data-theme='light'] {
+  --bg: #f6eedf;
+  --surface: #fffaf1;
+  --sunken: #ebe2d3;
+  --ink: #3a2418;
+  --ink-2: #6b4a36;
+  --rule: #d6c6ae;
+  --rule-strong: #876b58;
+  --accent: #2f6b64;
+  --accent-tint: #e6e4d5;
+  --accent-line: #bac7ba;
+  --on-accent: #fffaf1;
+  --attention: #9a4f1c;
+  --attention-tint: #f0e3d1;
+  --attention-line: #dabea4;
+  color-scheme: light;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -70,7 +71,7 @@ kbd {
 .gs-header { display: flex; align-items: center; justify-content: space-between; height: 50px; padding: 0 16px; }
 .gs-brand { display: flex; align-items: center; gap: 9px; }
 .gs-brand img { border-radius: 6px; }
-.gs-wordmark { font-weight: 650; font-size: 15px; letter-spacing: -0.01em; }
+.gs-wordmark { font-weight: 650; font-size: 15px; }
 .gs-power { display: flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 550; color: var(--ink-2); cursor: pointer; }
 .gs-power-state { min-width: 2.2em; text-align: right; color: var(--ink); font-weight: 650; }
 
@@ -91,26 +92,25 @@ kbd {
 
 /* ---------- Status card ---------- */
 .gs-hero {
-  display: grid; grid-template-columns: 32px 1fr; gap: 12px; margin: 0 12px 4px; padding: 12px 14px 12px 12px;
+  margin: 0 12px 4px; padding: 12px 14px;
   background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius);
 }
-.gs-hero-mark { border-radius: 7px; margin-top: 1px; }
 .gs-hero-body { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; min-width: 0; }
-.gs-hero-title { font-size: 17px; line-height: 1.25; font-weight: 650; letter-spacing: -0.01em; }
+.gs-hero-title { font-size: 17px; line-height: 1.25; font-weight: 650; }
 .gs-hero-context { font-weight: 550; color: var(--ink); overflow-wrap: anywhere; }
 .gs-hero-detail { color: var(--ink-2); }
 .gs-hero .gs-btn-primary { margin-top: 6px; }
 .gs-hero .gs-link { margin-top: 4px; text-align: left; }
 .gs-hero.is-protected { background: var(--accent-tint); border-color: var(--accent-line); }
 .gs-hero.is-protected .gs-hero-title { color: var(--accent); }
-.gs-hero.is-partial { background: var(--accent-tint); border: 1px dashed var(--accent); }
+.gs-hero.is-partial { background: var(--surface); border-color: var(--accent-line); }
 .gs-hero.is-partial .gs-hero-title { color: var(--accent); }
 .gs-hero.is-attention { background: var(--attention-tint); border-color: var(--attention-line); }
 .gs-hero.is-attention .gs-hero-title { color: var(--attention); }
 .gs-hero.is-off { background: var(--sunken); }
 
 /* ---------- Just muted ---------- */
-.gs-recent { margin: 8px 12px 0; padding: 10px 12px 4px; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--surface); }
+.gs-recent { padding: 8px 16px 0; }
 .gs-recent ul { list-style: none; }
 .gs-recent-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 44px; border-top: 1px solid var(--rule); }
 .gs-recent-row:first-child { border-top: 0; }
@@ -123,7 +123,7 @@ kbd {
 /* ---------- Sections and type ---------- */
 .gs-section { padding: 8px 16px 2px; }
 .gs-section + .gs-section { border-top: 1px solid var(--rule); }
-.gs-label { font-size: 12.5px; font-weight: 650; color: var(--ink-2); letter-spacing: 0.01em; margin-bottom: 6px; }
+.gs-label { font-size: 12.5px; font-weight: 650; color: var(--ink-2); margin-bottom: 6px; }
 .gs-sub { font-size: 13px; font-weight: 650; margin-top: 4px; }
 .gs-hint { color: var(--ink-2); font-size: 12.5px; }
 .gs-hint-attention { color: var(--attention); }
@@ -207,16 +207,11 @@ kbd {
 .gs-page { max-width: 600px; margin: 0 auto; padding: 48px 24px 64px; display: flex; flex-direction: column; gap: 20px; }
 .gs-page-head { display: flex; gap: 16px; align-items: flex-start; }
 .gs-page-head img { border-radius: 11px; flex: none; }
-.gs-page-title { font-size: 26px; line-height: 1.2; font-weight: 700; letter-spacing: -0.015em; }
+.gs-page-title { font-size: 26px; line-height: 1.2; font-weight: 700; }
 .gs-page-lede { margin-top: 4px; font-size: 15px; color: var(--ink-2); }
 .gs-page-text { font-size: 14.5px; color: var(--ink-2); margin-top: 6px; }
-.gs-steps { list-style: none; counter-reset: step; display: flex; flex-direction: column; gap: 22px; }
-.gs-steps > li { counter-increment: step; }
-.gs-steps h2 { display: flex; align-items: center; gap: 10px; font-size: 16px; margin-bottom: 10px; }
-.gs-steps h2::before {
-  content: counter(step); display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%;
-  background: var(--accent); color: var(--on-accent); font-size: 13px; font-weight: 700;
-}
+.gs-steps { display: flex; flex-direction: column; gap: 22px; }
+.gs-steps h2 { font-size: 16px; margin-bottom: 10px; }
 .gs-card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 10px 16px; }
 .gs-page > .gs-btn-primary { align-self: flex-start; }
 

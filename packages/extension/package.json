@@ -1,6 +1,7 @@
 {
   "name": "@guardianstream/extension",
   "version": "0.2.0",
+  "license": "GPL-3.0-or-later",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "package": "pnpm run build && Z=guardianstream-v$(node -p \"require('./dist/manifest.json').version\").zip && rm -f $Z && cd dist && zip -qr ../$Z . -x '*.DS_Store' 'public/*' && cd .. && echo \"Packaged: $Z, $(du -h $Z | cut -f1) (CWS limit: 10MB)\""
+    "package": "pnpm run build && Z=blast-phemur-v$(node -p \"require('./dist/manifest.json').version\").zip && rm -f $Z && cd dist && zip -qr ../$Z . -x '*.DS_Store' 'public/*' && cd .. && echo \"Packaged: $Z, $(du -h $Z | cut -f1) (CWS limit: 10MB)\""
   },
   "dependencies": {
     "@guardianstream/types": "workspace:*",

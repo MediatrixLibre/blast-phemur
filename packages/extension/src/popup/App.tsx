@@ -142,7 +142,7 @@ export function App() {
           <div className="gs-keys">
             <span className="gs-item-name">Keys on the player</span>
             <dl>
-              <dt><kbd>[</kbd></dt><dd>That was fine here: this moment plays from now on (then 1 allows a plain word everywhere)</dd>
+              <dt><kbd>[</kbd></dt><dd>That was fine here: this moment plays from now on. Then 1 allows the word everywhere, except a sacred name.</dd>
               <dt><kbd>]</kbd></dt><dd>That got through: mute it from now on</dd>
               <dt><kbd>\</kbd></dt><dd>Undo the last one</dd>
             </dl>
@@ -152,11 +152,8 @@ export function App() {
       </Fold>
 
       <footer className="gs-footer">
-        <span>No account · No tracking</span>
-        <span>
-          <a href="privacy.html" target="_blank" rel="noopener noreferrer">Privacy</a>
-          {VERSION && <span className="gs-version"> · v{VERSION}</span>}
-        </span>
+        <a href="privacy.html" target="_blank" rel="noopener noreferrer">Privacy</a>
+        {VERSION && <span className="gs-version">v{VERSION}</span>}
       </footer>
     </>
   );

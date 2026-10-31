@@ -72,7 +72,7 @@ export function installCorrectionShortcuts(
 
   const fine = (): void => {
     const hit = host.recentHits(LOOKBACK_HIT_S)[0];
-    if (!hit || hit.words.length === 0) return void say(`Nothing was hidden in the last ${LOOKBACK_HIT_S} seconds`);
+    if (!hit || hit.words.length === 0) return void say(`Nothing was muted in the last ${LOOKBACK_HIT_S} seconds`);
 
     // A false alarm is one moment: pass that moment, for every word in it.
     // Allowing a word everywhere is a second, deliberate step (and never for a sacred name).
@@ -82,7 +82,7 @@ export function installCorrectionShortcuts(
       if (!video || plain.length === 0) return void say(text, hint);
       chooser = ui(video, {
         text,
-        hint: `${hint} · press 1 to allow it everywhere`,
+        hint: `${hint} Press 1 to allow it everywhere.`,
         holdMs: 6000,
         chips: [{ label: `Allow ${list(plain)} everywhere`, onPick: () => allowEverywhere(plain) }],
       });
@@ -94,29 +94,29 @@ export function installCorrectionShortcuts(
       debugLog('correction', { kind: 'pass', n: hit.words.length });
       const what =
         plain.length === hit.words.length ? list(plain) : plain.length ? `${list(plain)} and the sacred name` : 'the sacred name';
-      return offerEverywhere(`✓ Passed this moment: ${what} plays here from now on`, `muted everywhere else · ${KEY_UNDO} undo`);
+      return offerEverywhere(`Passed this moment: ${what} plays here from now on`, `Still muted everywhere else. Press ${KEY_UNDO} to undo.`);
     }
 
     // A filter that names no title (none ships switched on today): no way to mark the moment
     if (plain.length === 0) return void say('Sacred names can’t be passed on this page, so nothing changed');
-    offerEverywhere('This moment can’t be marked on this page', 'nothing changed yet');
+    offerEverywhere('This moment can’t be marked on this page', 'Nothing changed yet.');
   };
 
   const allowEverywhere = (plain: string[]): void => {
     commit(words(), allowing(words(), plain));
     debugLog('correction', { kind: 'allow', n: plain.length });
-    say(`✓ Won’t hide ${list(plain)} anywhere`, `${KEY_UNDO}  undo`);
+    say(`Won’t mute ${list(plain)} anywhere`, `Press ${KEY_UNDO} to undo.`);
   };
 
   const addBlock = (word: string): void => {
     commit(words(), blocking(words(), [word]));
     debugLog('correction', { kind: 'block', n: 1 });
-    say(`✓ Will always hide ${list([word])}`, `${KEY_UNDO}  undo`);
+    say(`Will always mute ${list([word])}`, `Press ${KEY_UNDO} to undo.`);
   };
 
   const missed = (): void => {
     const lines = host.recentLines(LOOKBACK_LINE_S);
-    if (lines.length === 0) return void say('I could not see what was just said');
+    if (lines.length === 0) return void say(`No captions in the last ${LOOKBACK_LINE_S} seconds`);
     const pick = pickMissed(lines, words(), host.config());
     if (pick.auto) return addBlock(pick.auto);
     if (pick.choices.length === 0) return void say('No words to choose from');
@@ -124,7 +124,7 @@ export function installCorrectionShortcuts(
     if (!video) return;
     chooser = ui(video, {
       text: 'Which word got through?',
-      hint: 'press its number · Esc to cancel',
+      hint: 'Press its number, or Esc to cancel.',
       holdMs: 8000,
       chips: pick.choices.map((w) => ({ label: maskWord(w), onPick: () => addBlock(w) })),
     });
@@ -135,7 +135,7 @@ export function installCorrectionShortcuts(
     if (!step) return void say('Nothing to undo');
     host.save(revertChange(words(), step.before, step.after));
     debugLog('correction', { kind: 'undo' });
-    say('↩ Undone');
+    say('Undone');
   };
 
   const onKey = (raw: Event): void => {
