@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.guardianstream"
+       name="GuardianStream"
+       version="0.1.0"
+       provider-name="GuardianStream Community">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+  <extension point="xbmc.service" library="service.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Content filtering for Kodi using GuardianStream</summary>
+    <description lang="en">
+      Automatically skip or mute objectionable content during video playback.
+      Uses AI-generated and community-verified filter data from GuardianStream.
+      Supports blasphemy, profanity, nudity, violence, and user-defined categories.
+    </description>
+    <license>MIT</license>
+    <platform>all</platform>
+  </extension>
+</addon>

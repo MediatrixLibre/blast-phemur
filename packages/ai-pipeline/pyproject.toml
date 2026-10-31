@@ -1,0 +1,26 @@
+[project]
+name = "guardianstream-ai"
+version = "0.1.0"
+description = "AI pipeline for GuardianStream content filtering"
+requires-python = ">=3.11"
+dependencies = [
+    "faster-whisper>=1.1.0",
+    "pysrt>=1.1.2",
+]
+
+[project.optional-dependencies]
+full = [
+    "whisperx>=3.3.0",
+    "nudenet>=3.4.0",
+    "torch>=2.0.0",
+]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[build-system]
+requires = ["setuptools>=75.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GuardianStream -- Engine Test</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, sans-serif;
+      background: #111;
+      color: #eee;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px;
+      gap: 16px;
+    }
+    h1 { font-size: 20px; font-weight: 600; }
+    .subtitle { color: #888; font-size: 14px; }
+    .player-container {
+      position: relative;
+      width: 800px;
+      max-width: 100%;
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    video { width: 100%; display: block; }
+    .controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    button {
+      padding: 8px 16px;
+      border: 1px solid #444;
+      border-radius: 6px;
+      background: #222;
+      color: #eee;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    button:hover { background: #333; }
+    button.active { background: #2563eb; border-color: #3b82f6; }
+    .log {
+      width: 800px;
+      max-width: 100%;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 12px;
+      max-height: 300px;
+      overflow-y: auto;
+      line-height: 1.6;
+    }
+    .log-entry { color: #888; }
+    .log-entry.filter { color: #f59e0b; }
+    .log-entry.skip { color: #ef4444; }
+    .log-entry.mute { color: #8b5cf6; }
+    .log-entry.blur { color: #06b6d4; }
+    .log-entry.black { color: #64748b; }
+    .log-entry.info { color: #22c55e; }
+    .segment-map {
+      width: 800px;
+      max-width: 100%;
+      height: 40px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    .segment-bar {
+      position: absolute;
+      top: 4px;
+      height: 32px;
+      border-radius: 4px;
+      opacity: 0.7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #fff;
+      font-weight: 600;
+    }
+    .segment-bar.skip { background: #ef4444; }
+    .segment-bar.mute { background: #8b5cf6; }
+    .segment-bar.blur { background: #06b6d4; }
+    .segment-bar.black { background: #64748b; }
+    .playhead {
+      position: absolute;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background: #fff;
+      z-index: 10;
+      transition: left 0.1s linear;
+    }
+  </style>
+</head>
+<body>
+  <h1>GuardianStream Engine Test</h1>
+  <p class="subtitle">Sprint 0 -- FilterEngine + VideoDetector + Provider Modules</p>
+
+  <div class="player-container" id="player">
+    <video id="video" controls preload="auto">
+      <source
+        src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        type="video/mp4"
+      >
+    </video>
+  </div>
+
+  <div class="segment-map" id="segmentMap">
+    <div class="playhead" id="playhead"></div>
+  </div>
+
+  <div class="controls">
+    <button id="btnToggle" class="active">Filtering: ON</button>
+    <button id="btnJump5">Jump to 4s (skip test)</button>
+    <button id="btnJump15">Jump to 14s (mute test)</button>
+    <button id="btnJump25">Jump to 24s (blur test)</button>
+    <button id="btnJump40">Jump to 39s (black test)</button>
+    <button id="btnJump55">Jump to 54s (blasphemy test)</button>
+  </div>
+
+  <div class="log" id="log"></div>
+
+  <script type="module">
+    // ---- Inline mini-implementation for testing without build step ----
+    // This loads the sample filter JSON and runs a simplified engine
+    // to verify the architecture works. The real extension uses the
+    // compiled TypeScript modules.
+
+    const video = document.getElementById('video');
+    const logEl = document.getElementById('log');
+    const segmentMap = document.getElementById('segmentMap');
+    const playhead = document.getElementById('playhead');
+    const btnToggle = document.getElementById('btnToggle');
+
+    function log(msg, type = '') {
+      const entry = document.createElement('div');
+      entry.className = `log-entry ${type}`;
+      entry.textContent = `[${new Date().toISOString().slice(11, 23)}] ${msg}`;
+      logEl.appendChild(entry);
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    // Load sample filters
+    const response = await fetch('./sample-filters.json');
+    const filterSet = await response.json();
+    log(`Loaded ${filterSet.segments.length} segments for "${filterSet.title}"`, 'info');
+
+    // User config (matches DEFAULT_CONFIG from types package)
+    const config = {
+      categories: {
+        violence: { threshold: 2, action: 'skip' },
+        sexual_content: { threshold: 2, action: 'black' },
+        language: { threshold: 2, action: 'mute' },
+        nudity: { threshold: 2, action: 'blur' },
+        substances: { threshold: 0, action: 'skip' },
+        fear: { threshold: 0, action: 'skip' },
+        blasphemy: { threshold: 3, action: 'mute' },
+      },
+      minimumConfidence: 0.7,
+      showNotices: true,
+      noticePosition: 'top-right',
+      muteTransitionMs: 50,
+      skipTransitionMs: 150,
+    };
+
+    // Category resolution (walks dot hierarchy)
+    function resolveSetting(categoryId) {
+      if (config.categories[categoryId]) return config.categories[categoryId];
+      const parts = categoryId.split('.');
+      while (parts.length > 1) {
+        parts.pop();
+        const parent = parts.join('.');
+        if (config.categories[parent]) return config.categories[parent];
+      }
+      return null;
+    }
+
+    // Filter segments by user config
+    const activeSegments = filterSet.segments.filter(seg => {
+      const setting = resolveSetting(seg.category);
+      if (!setting || setting.threshold === 0) return false;
+      const minSeverity = 4 - setting.threshold;
+      if (seg.severity < minSeverity) return false;
+      if (seg.confidence < config.minimumConfidence) return false;
+      return true;
+    }).map(seg => {
+      const setting = resolveSetting(seg.category);
+      return { ...seg, action: setting?.action ?? seg.action };
+    });
+
+    log(`${activeSegments.length} segments active after applying user preferences`, 'info');
+
+    // Draw segment map
+    const duration = filterSet.duration || 596;
+    for (const seg of activeSegments) {
+      const bar = document.createElement('div');
+      bar.className = `segment-bar ${seg.action}`;
+      bar.style.left = `${(seg.start / duration) * 100}%`;
+      bar.style.width = `${((seg.end - seg.start) / duration) * 100}%`;
+      bar.textContent = seg.action.toUpperCase();
+      bar.title = `${seg.category} (${seg.start}s - ${seg.end}s)`;
+      segmentMap.appendChild(bar);
+    }
+
+    // Action priority
+    const ACTION_PRIORITY = { skip: 5, black: 4, blur: 3, bleep: 2, mute: 1 };
+
+    // Sort segments for binary search
+    activeSegments.sort((a, b) => a.start - b.start);
+
+    // Find active segments at time t
+    function findActive(t) {
+      const results = [];
+      for (const seg of activeSegments) {
+        if (seg.start > t + 0.1) break; // sorted, no more can match
+        if (seg.start <= t && seg.end > t) results.push(seg);
+      }
+      return results;
+    }
+
+    // Engine state
+    let filtering = true;
+    let isMuted = false;
+    let originalVolume = 1;
+    let blurOverlay = null;
+    let blackOverlay = null;
+    let noticeEl = null;
+    let noticeTimer = null;
+    let fmaShown = false;
+
+    function showNotice(msg, ms = 2000) {
+      if (!noticeEl) {
+        noticeEl = document.createElement('div');
+        Object.assign(noticeEl.style, {
+          position: 'absolute', top: '16px', right: '16px',
+          padding: '8px 16px', borderRadius: '6px',
+          background: 'rgba(0,0,0,0.85)', color: '#fff',
+          fontSize: '14px', fontFamily: 'system-ui', zIndex: '999',
+          transition: 'opacity 200ms', opacity: '0', pointerEvents: 'none',
+        });
+        document.getElementById('player').appendChild(noticeEl);
+      }
+      noticeEl.textContent = msg;
+      noticeEl.style.opacity = '1';
+      clearTimeout(noticeTimer);
+      noticeTimer = setTimeout(() => { noticeEl.style.opacity = '0'; }, ms);
+    }
+
+    function getOrCreateOverlay(type) {
+      const id = `gs-${type}-overlay`;
+      let el = document.getElementById(id);
+      if (!el) {
+        el = document.createElement('div');
+        el.id = id;
+        const styles = {
+          position: 'absolute', inset: '0', width: '100%', height: '100%',
+          display: 'none', zIndex: '998', pointerEvents: 'none',
+        };
+        if (type === 'blur') styles.backdropFilter = 'blur(30px)';
+        if (type === 'black') styles.background = '#000';
+        Object.assign(el.style, styles);
+        document.getElementById('player').appendChild(el);
+      }
+      return el;
+    }
+
+    function setMute(on) {
+      if (on && !isMuted) {
+        originalVolume = video.volume;
+        video.muted = true;
+        isMuted = true;
+      } else if (!on && isMuted) {
+        video.muted = false;
+        video.volume = originalVolume;
+        isMuted = false;
+      }
+    }
+
+    function restoreAll() {
+      setMute(false);
+      getOrCreateOverlay('blur').style.display = 'none';
+      getOrCreateOverlay('black').style.display = 'none';
+    }
+
+    // Main filtering loop
+    let lastAction = null;
+
+    video.addEventListener('timeupdate', () => {
+      if (!filtering) return;
+
+      // Update playhead
+      playhead.style.left = `${(video.currentTime / duration) * 100}%`;
+
+      const active = findActive(video.currentTime);
+
+      if (active.length === 0) {
+        if (lastAction) {
+          restoreAll();
+          lastAction = null;
+        }
+        return;
+      }
+
+      if (!fmaShown) {
+        showNotice('Content altered from original. Filtering by GuardianStream at viewer direction.', 4000);
+        fmaShown = true;
+      }
+
+      // Resolve highest priority action
+      let bestSeg = active[0];
+      let bestPriority = 0;
+      for (const seg of active) {
+        const p = ACTION_PRIORITY[seg.action] || 0;
+        if (p > bestPriority) { bestPriority = p; bestSeg = seg; }
+      }
+
+      const action = bestSeg.action;
+      if (action === lastAction) return; // already applied
+      restoreAll(); // clear previous
+
+      const label = bestSeg.category.split('.').pop()?.replace(/_/g, ' ');
+
+      switch (action) {
+        case 'skip':
+          const skipEnd = Math.max(...active.filter(s => s.action === 'skip').map(s => s.end));
+          video.currentTime = skipEnd;
+          showNotice(`Skipped: ${label}`);
+          log(`SKIP at ${bestSeg.start}s -> ${skipEnd}s [${bestSeg.category}]`, 'skip');
+          break;
+        case 'mute':
+          setMute(true);
+          showNotice(`Muted: ${label}`);
+          log(`MUTE ${bestSeg.start}s - ${bestSeg.end}s [${bestSeg.category}]`, 'mute');
+          break;
+        case 'blur':
+          getOrCreateOverlay('blur').style.display = 'block';
+          showNotice(`Blurred: ${label}`);
+          log(`BLUR ${bestSeg.start}s - ${bestSeg.end}s [${bestSeg.category}]`, 'blur');
+          break;
+        case 'black':
+          getOrCreateOverlay('black').style.display = 'block';
+          setMute(true);
+          showNotice(`Blocked: ${label}`);
+          log(`BLACK ${bestSeg.start}s - ${bestSeg.end}s [${bestSeg.category}]`, 'black');
+          break;
+      }
+      lastAction = action;
+    });
+
+    video.addEventListener('seeked', () => {
+      restoreAll();
+      lastAction = null;
+    });
+
+    // Controls
+    btnToggle.addEventListener('click', () => {
+      filtering = !filtering;
+      btnToggle.textContent = `Filtering: ${filtering ? 'ON' : 'OFF'}`;
+      btnToggle.classList.toggle('active', filtering);
+      if (!filtering) { restoreAll(); lastAction = null; }
+      log(`Filtering ${filtering ? 'enabled' : 'disabled'}`, 'info');
+    });
+
+    document.getElementById('btnJump5').addEventListener('click', () => { video.currentTime = 4; video.play(); });
+    document.getElementById('btnJump15').addEventListener('click', () => { video.currentTime = 14; video.play(); });
+    document.getElementById('btnJump25').addEventListener('click', () => { video.currentTime = 24; video.play(); });
+    document.getElementById('btnJump40').addEventListener('click', () => { video.currentTime = 39; video.play(); });
+    document.getElementById('btnJump55').addEventListener('click', () => { video.currentTime = 54; video.play(); });
+
+    log('Test page ready. Press play or use jump buttons.', 'info');
+  </script>
+</body>
+</html>

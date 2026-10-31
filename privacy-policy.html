@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GuardianStream privacy</title>
+  <style>
+    :root { --bg: #fafaf7; --ink: #1c1d1b; --muted: #55574f; --rule: #dcdcd3; --accent: #16555f; color-scheme: light dark; }
+    @media (prefers-color-scheme: dark) { :root { --bg: #141615; --ink: #ebece8; --muted: #a9aba3; --rule: #2e302d; --accent: #84c7c0; } }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 system-ui, -apple-system, 'Segoe UI', sans-serif; }
+    main { max-width: 680px; margin: 0 auto; padding: 48px 24px 64px; }
+    h1 { font-size: 28px; line-height: 1.2; margin: 0 0 4px; }
+    h2 { font-size: 18px; margin: 32px 0 8px; }
+    p, ul { margin: 0 0 12px; }
+    ul { padding-left: 22px; }
+    .date { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+    .short { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 0 0 24px; }
+    a { color: var(--accent); }
+    code { font: 14px ui-monospace, Menlo, monospace; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>GuardianStream privacy</h1>
+  <p class="date">Version 0.2.0 · Updated 31 October 2026</p>
+
+  <p class="short"><strong>In short:</strong> GuardianStream collects nothing and sends nothing. There is no account,
+    no analytics and no server of ours involved. Everything it does happens in your browser.</p>
+
+  <h2>What it does</h2>
+  <p>GuardianStream mutes blasphemy and swearing on streaming video, and masks those words in the captions. It finds
+    the words in the show's own captions, compares them with word lists that ship inside the extension, and lowers the
+    video's volume for the moment a word is spoken.</p>
+
+  <h2>What it reads</h2>
+  <ul>
+    <li><strong>Captions on the page</strong>, on the streaming sites it is allowed to run on, to find the words to mute.</li>
+    <li><strong>The player's caption file on YouTube and YouTube TV.</strong> A small script asks the YouTube player for the
+      caption file it already uses, from YouTube's own servers and with your YouTube sign-in, the same way the player does. This is what lets it mute
+      a word as it is spoken rather than after.</li>
+    <li><strong>Subtitle files you add yourself</strong>, if you choose to.</li>
+  </ul>
+  <p>None of this leaves your browser. GuardianStream makes no requests to any server of its own.</p>
+
+  <h2>What it keeps, on your device only</h2>
+  <ul>
+    <li>Your settings: what to mute, and your own Always mute and Never mute lists.</li>
+    <li>Passed moments ("That was fine here"): the show the moment was in (its caption track, or the page address and
+      program name) and a time, so that one moment plays next time. These are the only titles GuardianStream keeps,
+      and only for moments you passed.</li>
+    <li>Subtitle files you added.</li>
+  </ul>
+  <p>The support report copies a short timeline of this tab to your clipboard, with every filtered word masked. It is
+    kept in memory only, and it goes nowhere unless you paste it somewhere yourself.</p>
+  <p>Removing the extension removes all of it.</p>
+
+  <h2>What it never does</h2>
+  <ul>
+    <li>No analytics, telemetry, tracking pixels or crash reporting.</li>
+    <li>No viewing history. The only titles it keeps are the ones where you passed a moment, as above.</li>
+    <li>No selling or sharing of anything, with anyone.</li>
+  </ul>
+
+  <h2>Permissions, and why</h2>
+  <ul>
+    <li><strong>Streaming sites</strong> (YouTube TV, YouTube, Netflix, Prime Video, Disney+, Max, Hulu, DIRECTV Stream and
+      others): to read captions and lower the volume on those pages only.</li>
+    <li><strong>Storage</strong> and <strong>unlimited storage</strong>: your settings, and subtitle files, which can be large.</li>
+    <li><strong>Scripting</strong>: to connect tabs that were already open when GuardianStream was installed or updated,
+      so you do not have to reload them.</li>
+  </ul>
+
+  <h2>Children</h2>
+  <p>GuardianStream collects no information from anyone, children included.</p>
+
+  <h2>Changes to this page</h2>
+  <p>If an update changes what GuardianStream reads, keeps or sends, this page changes in the same update and the date
+    above moves.</p>
+
+  <h2>Chrome Web Store user data policy</h2>
+  <p>GuardianStream's use of information follows the Chrome Web Store User Data Policy, including the Limited Use
+    requirements.</p>
+
+  <h2>Questions</h2>
+  <p>Write to <a href="mailto:mediatrixdev@proton.me">mediatrixdev@proton.me</a>, or open an issue at
+    <a href="https://github.com/MediatrixLibre/guardianstream/issues">github.com/MediatrixLibre/guardianstream</a>.</p>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,357 @@
+{
+  "version": "2.0",
+  "contentId": "3a0a7d998d89e0ae8165757b4a70e403118ac67b064de39ec09a5a00a63f9a7f",
+  "title": "Sample Movie Dialog (Pipeline Test)",
+  "provider": "test",
+  "providerContentId": "sample-movie-dialog",
+  "duration": 660.0,
+  "segments": [
+    {
+      "id": "9432a00d-9931-452e-baf7-383e50d0abdb",
+      "start": 81.95,
+      "end": 82.85,
+      "category": "blasphemy.jesus_name",
+      "severity": 2,
+      "action": "mute",
+      "confidence": 0.9,
+      "source": "ai",
+      "votes": 0,
+      "words": [
+        "Jesus Christ"
+      ],
+      "wordTimestamps": [
+        [
+          82.0,
+          82.4
+        ],
+        [
+          82.4,
+          82.8
+        ]
+      ],
+      "description": "Blasphemy: Jesus Christ (rule_classified)"
+    },
+    {
+      "id": "db7a70a3-2c69-4a6f-8467-e81932ada45f",
+      "start": 151.041,
+      "end": 151.505,
+      "category": "blasphemy.gods_name",
+      "severity": 3,
+      "action": "mute",
+      "confidence": 0.95,
+      "source": "ai",
+      "votes": 0,
+      "words": [
+        "goddamn"
+      ],
+      "wordTimestamps": [
+        [
+          151.091,
+          151.455
+        ]
+      ],
+      "description": "Blasphemy: goddamn (unambiguous)"
+    },
+    {
+      "id": "6a4ff9be-aaf9-4968-b20f-c1106cc7debf",
+      "start": 184.95,
+      "end": 185.8,
+      "category": "blasphemy.sacred_mockery",
+      "severity": 2,
+      "action": "mute",
+      "confidence": 0.95,
+      "source": "ai",
+      "votes": 0,
+      "words": [
+        "Holy shit"
+      ],
+      "wordTimestamps": [
+        [
+          185.0,
+          185.375
+        ],
+        [
+          185.375,
+          185.75
+        ]
+      ],
+      "description": "Blasphemy: Holy shit (unambiguous)"
+    },
+    {
+      "id": "913e8221-86ac-482c-976a-a9473bf73be3",
+      "start": 256.15,
+      "end": 256.55,
+      "category": "language.profanity",
+      "severity": 2,
+      "action": "mute",
+      "confidence": 0.8,
+      "source": "ai",
+      "votes": 0,
+      "words": [
+        "bitch"
+      ],
+      "wordTimestamps": [
+        [
+          256.2,
+          256.5
+        ]
+      ],
+      "description": "Language: bitch"
+    },
+    {
+      "id": "d57833a0-dce1-4ec3-8372-19c84204bcc0",
+      "start": 319.95,
+      "end": 320.868,
+      "category": "blasphemy.jesus_name",
+      "severity": 2,
+      "action": "mute",
+      "confidence": 0.95,
+      "source": "ai",
+      "votes": 0,
+      "words": [
+        "For Christ's sake"
+      ],
+      "wordTimestamps": [
+        [
+          320.0,
+          320.273
+        ],
+        [
+          320.273,
+          320.545
+        ],
+        [
+          320.545,
+          320.818
+        ]
+      ],
+      "description": "Blasphemy: For Christ's sake (unambiguous)"
+    },
+    {
+      "id": "f87bbc12-c6b4-4598-ab9b-80a03b80c643",
+      "start": 369.95,
+      "end": 370.858,
+      "category": "blasphemy.gods_name",
+      "severity": 2,
+      "action": "mute",
+      "confidence": 0.966,
+      "source": "ai",
+      "votes": 0,
+      "words": [
+        "Oh my God"
+      ],
+      "wordTimestamps": [
+        [
+          370.0,
+          370.269
+        ],
+        [
+          370.269,
+          370.538
+        ],
+        [
+          370.538,
+          370.808
+        ]
+      ],
+      "description": "Blasphemy: Oh my God (ml_classified)"
+    },
+    {
+      "id": "9fa6b58a-9a8e-41a8-a694-ddf93e938a54",
+      "start": 390.617,
+      "end": 391.05,
+      "category": "language.profanity",
+      "severity": 2,
+      "action": "mute",
+      "confidence": 0.8,
+      "source": "ai",
+      "votes": 0,
+      "words": [
+        "asshole"
+      ],
+      "wordTimestamps": [
+        [
+          390.667,
+          391.0
+        ]
+      ],
+      "description": "Language: asshole"
+    },
+    {
+      "id": "02ec1d0f-a328-462b-886b-88112ada9c06",
+      "start": 435.617,
+      "end": 436.05,
+      "category": "language.profanity",
+      "severity": 2,
+      "action": "mute",
+      "confidence": 0.8,
+      "source": "ai",
+      "votes": 0,
+      "words": [
+        "fuck"
+      ],
+      "wordTimestamps": [
+        [
+          435.667,
+          436.0
+        ]
+      ],
+      "description": "Language: fuck"
+    },
+    {
+      "id": "5a615f4d-96c4-4c29-aeb5-1783695f355f",
+      "start": 449.95,
+      "end": 450.35,
+      "category": "blasphemy.jesus_name",
+      "severity": 1,
+      "action": "mute",
+      "confidence": 0.883,
+      "source": "ai",
+      "votes": 0,
+      "words": [
+        "Jesus"
+      ],
+      "wordTimestamps": [
+        [
+          450.0,
+          450.3
+        ]
+      ],
+      "description": "Blasphemy: Jesus (ml_classified)"
+    },
+    {
+      "id": "50ae0306-1fb3-4e04-964f-c3aac0522094",
+      "start": 451.45,
+      "end": 451.85,
+      "category": "blasphemy.jesus_name",
+      "severity": 1,
+      "action": "mute",
+      "confidence": 0.883,
+      "source": "ai",
+      "votes": 0,
+      "words": [
+        "Jesus"
+      ],
+      "wordTimestamps": [
+        [
+          451.5,
+          451.8
+        ]
+      ],
+      "description": "Blasphemy: Jesus (ml_classified)"
+    },
+    {
+      "id": "79bc0a87-7b6c-4787-b8af-2cf0eea17e71",
+      "start": 469.95,
+      "end": 471.383,
+      "category": "blasphemy.gods_name",
+      "severity": 1,
+      "action": "mute",
+      "confidence": 0.966,
+      "source": "ai",
+      "votes": 0,
+      "words": [
+        "Oh God",
+        "oh God"
+      ],
+      "wordTimestamps": [
+        [
+          470.0,
+          470.333
+        ],
+        [
+          470.333,
+          470.667
+        ],
+        [
+          470.667,
+          471.0
+        ],
+        [
+          471.0,
+          471.333
+        ]
+      ],
+      "description": "Blasphemy: Oh God (ml_classified); Blasphemy: oh God (ml_classified)"
+    },
+    {
+      "id": "bfc830bc-4d8b-42d1-a889-fd9c287cce9f",
+      "start": 556.859,
+      "end": 557.232,
+      "category": "language.profanity",
+      "severity": 2,
+      "action": "mute",
+      "confidence": 0.8,
+      "source": "ai",
+      "votes": 0,
+      "words": [
+        "damn"
+      ],
+      "wordTimestamps": [
+        [
+          556.909,
+          557.182
+        ]
+      ],
+      "description": "Language: damn"
+    },
+    {
+      "id": "e18dae81-309f-4bdd-9f1f-5ec75e77ce2e",
+      "start": 600.7,
+      "end": 601.05,
+      "category": "language.profanity",
+      "severity": 2,
+      "action": "mute",
+      "confidence": 0.8,
+      "source": "ai",
+      "votes": 0,
+      "words": [
+        "hell"
+      ],
+      "wordTimestamps": [
+        [
+          600.75,
+          601.0
+        ]
+      ],
+      "description": "Language: hell"
+    },
+    {
+      "id": "2d01e9a4-0135-47bb-b052-a46256e478c1",
+      "start": 614.95,
+      "end": 616.1,
+      "category": "blasphemy.gods_name",
+      "severity": 2,
+      "action": "mute",
+      "confidence": 0.977,
+      "source": "ai",
+      "votes": 0,
+      "words": [
+        "Oh my God"
+      ],
+      "wordTimestamps": [
+        [
+          615.0,
+          615.35
+        ],
+        [
+          615.35,
+          615.7
+        ],
+        [
+          615.7,
+          616.05
+        ]
+      ],
+      "description": "Blasphemy: Oh my God (ml_classified)"
+    }
+  ],
+  "coverage": {
+    "audioAnalyzed": true,
+    "visualAnalyzed": false,
+    "sceneAnalyzed": false,
+    "humanReviewed": false,
+    "completenessEstimate": 0.5,
+    "lastUpdated": "2026-03-29T18:29:56.275513+00:00"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "version": "2.0",
+  "contentId": "test-big-buck-bunny",
+  "title": "Big Buck Bunny (Test)",
+  "provider": "generic",
+  "providerContentId": "test",
+  "duration": 596,
+  "segments": [
+    {
+      "id": "seg-001",
+      "start": 5.0,
+      "end": 8.0,
+      "category": "violence.mild",
+      "severity": 1,
+      "action": "skip",
+      "confidence": 0.95,
+      "source": "official",
+      "votes": 10,
+      "description": "Test skip segment (5-8s)"
+    },
+    {
+      "id": "seg-002",
+      "start": 15.0,
+      "end": 17.5,
+      "category": "language.profanity",
+      "severity": 2,
+      "action": "mute",
+      "confidence": 0.92,
+      "source": "ai",
+      "votes": 5,
+      "words": ["test-word"],
+      "description": "Test mute segment (15-17.5s)"
+    },
+    {
+      "id": "seg-003",
+      "start": 25.0,
+      "end": 30.0,
+      "category": "nudity",
+      "severity": 3,
+      "action": "blur",
+      "confidence": 0.88,
+      "source": "community",
+      "votes": 3,
+      "description": "Test blur segment (25-30s)"
+    },
+    {
+      "id": "seg-004",
+      "start": 40.0,
+      "end": 45.0,
+      "category": "sexual_content",
+      "severity": 3,
+      "action": "black",
+      "confidence": 0.90,
+      "source": "ai",
+      "votes": 7,
+      "description": "Test black screen segment (40-45s)"
+    },
+    {
+      "id": "seg-005",
+      "start": 55.0,
+      "end": 56.5,
+      "category": "blasphemy.gods_name",
+      "severity": 2,
+      "action": "mute",
+      "confidence": 0.85,
+      "source": "ai",
+      "votes": 2,
+      "words": ["test-blasphemy"],
+      "description": "Test blasphemy mute (55-56.5s)"
+    }
+  ],
+  "coverage": {
+    "audioAnalyzed": true,
+    "visualAnalyzed": true,
+    "sceneAnalyzed": false,
+    "humanReviewed": false,
+    "completenessEstimate": 0.6,
+    "lastUpdated": "2026-03-29T00:00:00Z"
+  }
+}

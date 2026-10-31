@@ -1,0 +1,14 @@
+packages:
+  - 'packages/*'
+
+# Security pins carried over from package.json "overrides" (npm). pnpm reads
+# them from here; verify they land in pnpm-lock.yaml after any change.
+overrides:
+  'path-to-regexp@<0.2.0': '^0.1.13'
+  tmp: '^0.2.4'
+  rollup: '^4.59.0'
+  vite: '^8.3.4'
+
+allowBuilds:
+  better-sqlite3: true
+  esbuild: true

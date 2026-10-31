@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.turbo/
+*.tsbuildinfo
+.DS_Store
+.env
+.env.local
+*.safetensors
+packages/ai-pipeline/models/
+
+# Local build output and data
+.next/
+packages/api/data/
+ship/logs/
+__pycache__/
+packages/extension/e2e/.cache/
+packages/extension/*.zip

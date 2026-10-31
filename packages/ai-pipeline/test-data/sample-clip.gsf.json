@@ -1,0 +1,17 @@
+{
+  "version": "2.0",
+  "contentId": "64d46b5f06af0d7dae233f0190ce4f0bbb7cee2e30da33aa2045602fb51fbebf",
+  "title": "Sample Clip (Whisper Test)",
+  "provider": "test",
+  "providerContentId": "sample-clip",
+  "duration": 7200.0,
+  "segments": [],
+  "coverage": {
+    "audioAnalyzed": true,
+    "visualAnalyzed": false,
+    "sceneAnalyzed": false,
+    "humanReviewed": false,
+    "completenessEstimate": 0.5,
+    "lastUpdated": "2026-03-29T18:49:13.215551+00:00"
+  }
+}

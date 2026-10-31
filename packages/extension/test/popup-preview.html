@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GuardianStream Popup Preview</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      background: #333;
+      padding: 40px;
+      font-family: system-ui;
+    }
+    .popup-frame {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    h2 {
+      color: #999;
+      text-align: center;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h2>Popup Preview (360px width)</h2>
+    <div class="popup-frame">
+      <iframe
+        src="popup-standalone.html"
+        width="360"
+        height="580"
+        style="border:none;"
+      ></iframe>
+    </div>
+  </div>
+</body>
+</html>

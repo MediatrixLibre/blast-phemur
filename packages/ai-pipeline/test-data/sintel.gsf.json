@@ -1,0 +1,17 @@
+{
+  "version": "2.0",
+  "contentId": "72be7619f79cf131475ee603edea08d4595b0a79ceb071fecbea9c7c54e8c0ac",
+  "title": "Sintel (Open Movie)",
+  "provider": "test",
+  "providerContentId": "sintel",
+  "duration": 7200.0,
+  "segments": [],
+  "coverage": {
+    "audioAnalyzed": true,
+    "visualAnalyzed": false,
+    "sceneAnalyzed": false,
+    "humanReviewed": false,
+    "completenessEstimate": 0.5,
+    "lastUpdated": "2026-03-29T19:56:09.357281+00:00"
+  }
+}

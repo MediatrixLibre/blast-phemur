@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GuardianStream</title>
+  <link rel="stylesheet" href="../src/popup/popup.css">
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    // Mock chrome API for standalone testing
+    window.chrome = {
+      storage: {
+        local: {
+          get: (key, cb) => cb({}),
+          set: (data) => console.log('[mock] storage.set', data),
+        }
+      },
+      tabs: {
+        query: (opts, cb) => cb([]),
+        sendMessage: () => {},
+      },
+      runtime: { lastError: null },
+    };
+  </script>
+  <script type="module">
+    // Inline React render for standalone preview (no build step needed)
+    import { createElement as h, useState } from 'https://esm.sh/react@19';
+    import { createRoot } from 'https://esm.sh/react-dom@19/client';
+
+    const DEFAULT_CONFIG = {
+      categories: {
+        blasphemy: { threshold: 3, action: 'mute' },
+        language: { threshold: 2, action: 'mute' },
+        violence: { threshold: 1, action: 'skip' },
+        sexual_content: { threshold: 2, action: 'skip' },
+        nudity: { threshold: 2, action: 'blur' },
+        substances: { threshold: 0, action: 'skip' },
+        fear: { threshold: 0, action: 'skip' },
+      },
+      activePack: 'catholic-family',
+      minimumConfidence: 0.7,
+      showNotices: true,
+      noticePosition: 'top-right',
+      muteTransitionMs: 50,
+      skipTransitionMs: 150,
+      profiles: [
+        { id: 'dad', name: 'Dad', icon: '\u{1F468}' },
+        { id: 'mom', name: 'Mom', icon: '\u{1F469}' },
+        { id: 'kids', name: 'Kids', icon: '\u{1F466}' },
+      ],
+      activeProfileId: 'dad',
+    };
+
+    const CATEGORIES = [
+      { id: 'blasphemy', label: 'Blasphemy', icon: '\u2020' },
+      { id: 'language', label: 'Language', icon: '\u26A0' },
+      { id: 'violence', label: 'Violence', icon: '\u2694' },
+      { id: 'sexual_content', label: 'Sexual Content', icon: '\u26D4' },
+      { id: 'nudity', label: 'Nudity', icon: '\u26D4' },
+      { id: 'substances', label: 'Substances', icon: '\u2615' },
+      { id: 'fear', label: 'Fear/Horror', icon: '\u26A1' },
+    ];
+
+    const PACKS = [
+      { id: 'catholic-family', name: 'Catholic Family', desc: 'Blasphemy, profanity, nudity, violence' },
+      { id: 'young-kids-5-8', name: 'Young Kids (5-8)', desc: 'Strict filtering for young children' },
+      { id: 'clean-language', name: 'Clean Language', desc: 'Language and blasphemy only' },
+      { id: 'trauma-informed', name: 'Trauma-Informed', desc: 'Sexual assault, self-harm, suicide' },
+    ];
+
+    const TH_LABELS = { 0: 'Off', 1: '3', 2: '2+', 3: 'All' };
+
+    function App() {
+      const [enabled, setEnabled] = useState(true);
+      const [config, setConfig] = useState(DEFAULT_CONFIG);
+
+      const status = { provider: 'Netflix', segmentCount: 47, isFiltering: true, title: 'The Chosen' };
+
+      const setCatThreshold = (id, t) => {
+        setConfig(c => ({
+          ...c,
+          categories: { ...c.categories, [id]: { ...c.categories[id], threshold: t } }
+        }));
+      };
+
+      const setActivePack = (packId) => {
+        setConfig(c => ({ ...c, activePack: c.activePack === packId ? null : packId }));
+      };
+
+      return h('div', null,
+        // Header
+        h('div', { className: 'gs-header' },
+          h('div', { className: 'gs-logo' },
+            h('div', { className: 'gs-logo-icon' }, 'G'),
+            h('span', null, 'GuardianStream'),
+          ),
+          h('label', { className: 'gs-toggle' },
+            h('input', { type: 'checkbox', checked: enabled, onChange: e => setEnabled(e.target.checked) }),
+            h('div', { className: 'gs-toggle-track' }),
+            h('div', { className: 'gs-toggle-thumb' }),
+          ),
+        ),
+
+        // Status bar
+        h('div', { className: 'gs-status' },
+          h('div', { className: `gs-status-dot ${enabled ? 'active' : 'inactive'}` }),
+          h('span', null, enabled ? `Filtering ${status.segmentCount} segments` : 'Filtering disabled'),
+          status.provider && h('span', { className: 'gs-provider-badge' }, status.provider),
+        ),
+
+        // Profiles
+        h('div', { className: 'gs-section' },
+          h('div', { className: 'gs-section-title' }, 'Profiles'),
+          h('div', { className: 'gs-profiles' },
+            config.profiles.map(p =>
+              h('div', {
+                key: p.id,
+                className: `gs-profile ${p.id === config.activeProfileId ? 'active' : ''}`,
+                onClick: () => setConfig(c => ({ ...c, activeProfileId: p.id })),
+              },
+                h('div', { className: 'gs-profile-icon' }, p.icon),
+                h('div', { className: 'gs-profile-name' }, p.name),
+              )
+            ),
+          ),
+        ),
+
+        // Packs
+        h('div', { className: 'gs-section' },
+          h('div', { className: 'gs-section-title' }, 'Quick Presets'),
+          h('div', { className: 'gs-pack-list' },
+            PACKS.map(pack =>
+              h('div', {
+                key: pack.id,
+                className: `gs-pack-item ${config.activePack === pack.id ? 'selected' : ''}`,
+                onClick: () => setActivePack(pack.id),
+              },
+                h('div', null,
+                  h('div', { className: 'gs-pack-name' }, pack.name),
+                  h('div', { className: 'gs-pack-desc' }, pack.desc),
+                ),
+                h('div', { className: 'gs-pack-check' }, config.activePack === pack.id ? '\u2713' : ''),
+              )
+            ),
+          ),
+        ),
+
+        // Categories
+        h('div', { className: 'gs-section' },
+          h('div', { className: 'gs-section-title' }, 'Filter Categories'),
+          CATEGORIES.map(cat => {
+            const t = config.categories[cat.id]?.threshold ?? 0;
+            return h('div', { key: cat.id, className: 'gs-category-row' },
+              h('div', { className: 'gs-category-label' },
+                h('span', { className: 'gs-category-icon' }, cat.icon),
+                h('span', null, cat.label),
+              ),
+              h('div', { className: 'gs-threshold' },
+                [0, 1, 2, 3].map(v =>
+                  h('button', {
+                    key: v,
+                    className: `gs-threshold-btn ${v === t ? 'active' : ''}`,
+                    onClick: () => setCatThreshold(cat.id, v),
+                  }, TH_LABELS[v])
+                ),
+              ),
+            );
+          }),
+        ),
+
+        // Footer
+        h('div', { className: 'gs-footer' },
+          h('span', null, 'v0.1.0'),
+          h('span', null, 'Open source'),
+        ),
+      );
+    }
+
+    createRoot(document.getElementById('root')).render(h(App));
+  </script>
+</body>
+</html>

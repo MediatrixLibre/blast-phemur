@@ -1,0 +1,28 @@
+{
+  "name": "@guardianstream/extension",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite build --watch --mode development",
+    "build": "vite build && vite build -c vite.content.config.ts && vite build -c vite.bridge.config.ts && sed 's|\\.\\./||g' dist/public/popup.html > dist/popup.html",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "package": "pnpm run build && Z=guardianstream-v$(node -p \"require('./dist/manifest.json').version\").zip && rm -f $Z && cd dist && zip -qr ../$Z . -x '*.DS_Store' 'public/*' && cd .. && echo \"Packaged: $Z, $(du -h $Z | cut -f1) (CWS limit: 10MB)\""
+  },
+  "dependencies": {
+    "@guardianstream/types": "workspace:*",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.3.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "playwright-core": "1.58.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.3"
+  }
+}

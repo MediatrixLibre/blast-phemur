@@ -1,0 +1,14 @@
+{
+  "appName": {
+    "message": "GuardianStream",
+    "description": "The extension's name. A rename is this one value."
+  },
+  "appShortName": {
+    "message": "GuardianStream",
+    "description": "Short name where space is tight."
+  },
+  "appDescription": {
+    "message": "Mutes blasphemy and swearing on streaming video and masks them in the captions. Free, no account, no tracking.",
+    "description": "Store and extensions-page description (132 characters at most)."
+  }
+}

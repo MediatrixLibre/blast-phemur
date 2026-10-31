@@ -1,0 +1,6 @@
+# Stems of the strongest profanity. A language.profanity word containing one
+# of these is severity 3 (filtered even at "Severe"); the rest are severity 2.
+# Read by the extension (scripts/gen-lexicon.py) and the Python analyzer.
+fuck
+cunt
+cocksuck
