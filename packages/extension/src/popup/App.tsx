@@ -8,6 +8,7 @@ import { useConfig } from './hooks/useConfig.js';
 import { useStatus } from './hooks/useStatus.js';
 import { useRecent } from './hooks/useRecent.js';
 import { openSubtitleImport, VERSION } from './brand.js';
+import { UpdateCheck } from './components/UpdateCheck.js';
 import { Header } from './components/Header.js';
 import { Hero } from './components/Hero.js';
 import { Recent } from './components/Recent.js';
@@ -153,7 +154,7 @@ export function App() {
 
       <footer className="gs-footer">
         <a href="privacy.html" target="_blank" rel="noopener noreferrer">Privacy</a>
-        {VERSION && <span>v{VERSION}</span>}
+        {VERSION && <UpdateCheck version={VERSION} />}
       </footer>
     </>
   );
