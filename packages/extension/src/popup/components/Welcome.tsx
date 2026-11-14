@@ -25,8 +25,8 @@ export function Welcome({ config, onChange }: { config: UserConfig; onChange: (c
           <h2>While you watch</h2>
           <p className="gs-page-text">
             Open a show on {SITES} and protection starts by itself. On YouTube and YouTube TV it times each word from the
-            show's own caption track. On DIRECTV Stream it reads the captions as they appear, so turn captions (CC) on.
-            Click the toolbar button to see which one is in use.
+            show's own caption track. On DIRECTV Stream and Plex it reads the captions the video carries, so turn captions
+            (CC) on. Click the toolbar button to see which one is in use.
           </p>
           <p className="gs-page-text">
             If something that was fine gets muted, such as a prayer, press <kbd>[</kbd> on the player: that moment plays

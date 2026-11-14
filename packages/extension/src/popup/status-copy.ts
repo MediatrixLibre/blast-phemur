@@ -26,9 +26,9 @@ export interface StatusCopy {
   secondary?: { kind: StatusAction; label: string };
 }
 
-export const SITES = 'YouTube TV, YouTube or DIRECTV Stream';
+export const SITES = 'YouTube TV, YouTube, DIRECTV Stream or Plex';
 /** The short form, where two lines is the budget */
-export const SITES_SHORT = 'YouTube TV, YouTube or DIRECTV Stream';
+export const SITES_SHORT = 'YouTube TV, YouTube, DIRECTV Stream or Plex';
 
 const plural = (n: number, one: string, many = `${one}s`): string => `${n} ${n === 1 ? one : many}`;
 

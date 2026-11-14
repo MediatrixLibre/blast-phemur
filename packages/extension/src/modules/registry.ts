@@ -13,6 +13,7 @@ import { DisneyModule } from './disney.js';
 import { YouTubeModule } from './youtube.js';
 import { HBOMaxModule } from './hbomax.js';
 import { DirecTVModule } from './directv.js';
+import { PlexModule } from './plex.js';
 
 /** All registered provider modules, most specific first */
 const MODULES: ProviderModule[] = [
@@ -22,6 +23,7 @@ const MODULES: ProviderModule[] = [
   YouTubeModule,
   HBOMaxModule,
   DirecTVModule,
+  PlexModule,
 ];
 
 /**

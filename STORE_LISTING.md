@@ -1,6 +1,6 @@
-# Chrome Web Store listing: Blast Phemur* 0.2.0
+# Chrome Web Store listing: Blast Phemur* 0.2.1
 
-Every claim here is true of the 0.2.0 build. Update this file in the same change as any feature that alters a claim.
+Every claim here is true of the 0.2.1 build. Update this file in the same change as any feature that alters a claim.
 
 ## Name
 Blast Phemur* (from `packages/extension/public/_locales/en/messages.json`, `appName`)
@@ -17,7 +17,7 @@ HOW IT WORKS
 Blast Phemur finds the words in the show's own captions and lowers the volume for the moment each one is spoken.
 
 - On YouTube TV and YouTube it reads the player's own caption track, so each word is muted as it is spoken, even in a background tab. Word timing comes from the captions, so it can be slightly early or late.
-- On DIRECTV Stream it reads the captions the video carries, so turn captions (CC) on. Adding the episode's subtitle file gives word-by-word timing there too.
+- On DIRECTV Stream and Plex it reads the captions the video carries, so turn captions (CC) on. On Plex the whole film's captions arrive at once, so each word is muted as it is spoken there too. Adding the episode's subtitle file gives word-by-word timing on DIRECTV Stream.
 - The toolbar button always says which of these is happening on the tab you are watching.
 
 WHAT YOU CHOOSE
@@ -40,9 +40,9 @@ The code is public under the GNU General Public License version 3 or later, and 
 
 SUPPORTED SERVICES
 
-Runs on YouTube TV (tested on real playback), YouTube and DIRECTV Stream (built for and checked against their caption formats). More services will be added as each is tested.
+Runs on YouTube TV and Plex (tested on real playback), YouTube and DIRECTV Stream (built for and checked against their caption formats). More services will be added as each is tested.
 
-(Store policy: name at most five services or brands in the description; a longer list goes on a linked page or in a screenshot. This text names three.)
+(Store policy: name at most five services or brands in the description; a longer list goes on a linked page or in a screenshot. This text names four.)
 
 ## Category
 Accessibility

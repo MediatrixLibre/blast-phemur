@@ -2,14 +2,14 @@
 
 A browser extension that mutes blasphemy and swearing as they are spoken on streaming video, and masks the same words in the captions. No account, no analytics, no server: everything happens in your browser.
 
-Version 0.2.0. Built for Chrome; tested in Brave, which runs Chrome extensions as they are.
+Version 0.2.1. Built for Chrome; tested in Brave, which runs Chrome extensions as they are.
 
 ## How it works
 
 Blast Phemur finds the words in the show's own captions and lowers the volume for the moment each one is spoken.
 
 - On YouTube TV and YouTube it reads the player's own caption track, so each word is muted as it is spoken, even in a background tab. Word timing comes from the captions, so it can be slightly early or late.
-- On DIRECTV Stream it reads the captions the video carries, so turn captions (CC) on. Adding the episode's subtitle file gives word-by-word timing there too.
+- On DIRECTV Stream and Plex it reads the captions the video carries, so turn captions (CC) on. On Plex the whole film's captions arrive at once, so each word is muted as it is spoken there too. Adding the episode's subtitle file gives word-by-word timing on DIRECTV Stream.
 - The toolbar button always says which of these is happening on the tab you are watching.
 
 A false alarm is one moment, so that is what you fix: "That was fine here" in the toolbar button, or `[` on the player, lets that moment play from then on while the word stays muted everywhere else. `]` mutes something that got through; `\` undoes.
@@ -19,6 +19,7 @@ A false alarm is one moment, so that is what you fix: "That was fine here" in th
 | Service | Status |
 |---|---|
 | YouTube TV | Tested on real playback |
+| Plex (free movies and shows at watch.plex.tv) | Tested on real playback, with a subtitle chosen in the player |
 | YouTube, DIRECTV Stream | Built for and checked against their caption formats |
 | Netflix, Prime Video, Disney+, Hulu, Max and others | Built in the code but switched off until each is tested |
 
